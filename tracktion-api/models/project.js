@@ -35,6 +35,10 @@ const projectSchema = new mongoose.Schema({
 			ref: 'Task',
 		},
 	],
+	totalTasks: {
+		type: Number,
+		required: true,
+	},
 });
 
 const Project = mongoose.model('Project', projectSchema);
