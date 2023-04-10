@@ -6,6 +6,7 @@ const express = require('express');
 const app = express();
 
 app.use(morgan('tiny'));
+app.use(express.json());
 app.use('/api/users', users);
 
 // Define the port to listen on

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const express = requrie('express');
+const express = require('express');
 const { User } = require('../models/user');
 const router = express.Router();
 
@@ -12,10 +12,33 @@ router.get('/me', async (req, res) => {
 // GET specified user
 router.get('/:id', async (req, res) => {
 	const user = await User.findById(req.params.id).select('-password');
-    if (!user) return res.status(404).send('The user with the given ID was not found.')
+	if (!user) return res.status(404).send('The user with the given ID was not found.');
 	res.send(user);
 });
 
 // POST new user
+router.post('/', async (req, res) => {
+	let user = new User({
+		name: req.body.name,
+		email: req.body.email,
+		password: req.body.password,
+	});
+	user = await user.save();
+	res.send(user);
+});
+
+// PUT specified user
+router.put('/:id', async (req, res) => {
+	const user = await User.findByIdAndUpdate(
+		req.params.id,
+		{ name: req.body.name },
+		{ new: true }
+	);
+	if (!user) return res.status(404).send('The user with the given ID was not found.');
+
+	res.send(user);
+});
+
+// DELETE specified user
 
 module.exports = router;
