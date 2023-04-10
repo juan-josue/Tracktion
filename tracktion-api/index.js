@@ -1,5 +1,6 @@
 require('dotenv').config();
 const users = require('./routes/users');
+const projects = require('./routes/projects');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const express = require('express');
@@ -8,6 +9,7 @@ const app = express();
 app.use(morgan('tiny'));
 app.use(express.json());
 app.use('/api/users', users);
+app.use('/api/projects', projects);
 
 // Define the port to listen on
 const port = process.env.PORT || 3000;
