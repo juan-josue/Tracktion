@@ -27,6 +27,12 @@ const projectSchema = new mongoose.Schema({
 	owner: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
+		required: true,
+	},
+	code: {
+		type: String,
+		required: true,
+		unique: true,
 	},
 	members: [memberSchema],
 	tasks: [
@@ -35,11 +41,20 @@ const projectSchema = new mongoose.Schema({
 			ref: 'Task',
 		},
 	],
-	totalTasks: {
-		type: Number,
-		required: true,
-	},
 });
 
+async function generateJoinCode() {
+	let code;
+	do {
+		code =
+			Math.random().toString(36).substring(2, 6).toUpperCase() +
+			'-' +
+			Math.random().toString(36).substring(2, 6).toUpperCase();
+	} while (await Project.findOne({ code: code }));
+	return code;
+}
+
 const Project = mongoose.model('Project', projectSchema);
+
 exports.Project = Project;
+exports.generateJoinCode = generateJoinCode;
