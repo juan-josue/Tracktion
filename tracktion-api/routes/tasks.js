@@ -33,24 +33,32 @@ router.post('/', async (req, res) => {
 	res.send(task);
 });
 
-// PUT specified user
+// PUT specified task
 router.put('/:id', async (req, res) => {
-	const user = await User.findByIdAndUpdate(
+	const task = await Task.findByIdAndUpdate(
 		req.params.id,
-		{ name: req.body.name },
+		{
+			name: req.body?.name,
+			xpReward: req.body?.xpReward,
+			summary: req.body?.summary,
+			priority: req.body?.priority,
+			status: req.body?.status,
+			taskTackler: req.body?.taskTackler,
+			dateModified: Date.now(),
+		},
 		{ new: true }
 	);
-	if (!user) return res.status(404).send('The user with the given ID was not found.');
+	if (!task) return res.status(404).send('The task with the given ID was not found.');
 
-	res.send(user);
+	res.send(task);
 });
 
-// DELETE specified user
+// DELETE specified tasks
 router.delete('/:id', async (req, res) => {
-	const user = await User.findByIdAndDelete(req.params.id);
-	if (!user) return res.status(404).send('The user with the given ID was not found.');
+	const tasks = await Task.findByIdAndDelete(req.params.id);
+	if (!tasks) return res.status(404).send('The tasks with the given ID was not found.');
 
-	res.send(user);
+	res.send(tasks);
 });
 
 module.exports = router;
