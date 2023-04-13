@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const { Project, Member, generateJoinCode } = require('../models/project');
+const { Project, generateJoinCode } = require('../models/project');
+const { Member } = require('../models/member');
 const router = express.Router();
 
 // GET specified project
@@ -45,7 +46,7 @@ router.post('/:id/members', async (req, res) => {
 	});
 	newMember = await newMember.save();
 
-	project.members.push(newMember);
+	project.members.push(newMember._id);
 	project = await project.save();
 	res.send(project);
 });
