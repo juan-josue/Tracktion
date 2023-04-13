@@ -32,6 +32,13 @@ router.post('/:id/members', async (req, res) => {
 	if (!project)
 		return res.status(404).send('The project with the given ID was not found.');
 
+	const existingMember = await Member.findOne({
+		project: req.params.id,
+		user: req.body.userId,
+	});
+	if (existingMember)
+		return res.status(400).send('The user is already a member for this project.');
+
 	let newMember = new Member({
 		user: req.body.userId,
 		project: req.params.id,
