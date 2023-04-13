@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const memberSchema = new mongoose.Schema({
-	user: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User',
-	},
 	level: {
 		type: Number,
 		default: 0,
@@ -12,6 +8,16 @@ const memberSchema = new mongoose.Schema({
 	xp: {
 		type: Number,
 		default: 0,
+	},
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+		required: true,
+	},
+	project: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Project',
+		required: true,
 	},
 });
 
@@ -23,7 +29,7 @@ const projectSchema = new mongoose.Schema({
 	description: {
 		type: String,
 		required: true,
-	}, 
+	},
 	owner: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
@@ -59,6 +65,8 @@ async function generateJoinCode() {
 }
 
 const Project = mongoose.model('Project', projectSchema);
+const Member = mongoose.model('Member', memberSchema);
 
 exports.Project = Project;
+exports.Member = Member;
 exports.generateJoinCode = generateJoinCode;
