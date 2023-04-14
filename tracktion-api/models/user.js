@@ -20,12 +20,6 @@ const userSchema = new mongoose.Schema({
 			ref: 'Project',
 		},
 	],
-	ownedProjects: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Project',
-		},
-	],
 });
 
 const User = mongoose.model('User', userSchema);
