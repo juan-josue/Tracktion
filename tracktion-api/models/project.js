@@ -14,7 +14,7 @@ const projectSchema = new mongoose.Schema({
 		ref: 'User',
 		required: true,
 	},
-	code: {
+	joinCode: {
 		type: String,
 		required: true,
 		unique: true,

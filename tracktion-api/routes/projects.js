@@ -15,16 +15,24 @@ router.get('/:id', async (req, res) => {
 
 // POST new project
 router.post('/', async (req, res) => {
-	const code = await generateJoinCode();
+	const joinCode = await generateJoinCode();
 
 	let project = new Project({
 		name: req.body.name,
 		description: req.body.description,
 		owner: req.body.owner,
-		code: code,
+		joinCode: joinCode,
 	});
 
+	let newMember = new Member({
+		user: req.body.owner,
+		project: project._id,
+	});
+	await newMember.save();
+	project.members.push(newMember);
+
 	project = await project.save();
+
 	res.send(project);
 });
 
@@ -71,7 +79,6 @@ router.post('/members', async (req, res) => {
 
 	const user = await User.findById(newMember.user);
 	if (!user) return res.status(404).send('The user with the given ID was not found.');
-	console.log(user.projects);
 	user.projects.push(project._id);
 	await user.save();
 
