@@ -3,6 +3,7 @@ const express = require('express');
 const { Project, generateJoinCode } = require('../models/project');
 const { Member } = require('../models/member');
 const { User } = require('../models/user');
+const { Task } = require('../models/task');
 const router = express.Router();
 
 // GET specified project
@@ -29,9 +30,11 @@ router.post('/', async (req, res) => {
 		project: project._id,
 	});
 	await newMember.save();
-	project.members.push(newMember);
 
+	project.members.push(newMember);
 	project = await project.save();
+
+	await User.findByIdAndUpdate(req.body.owner, { $push: { projects: project._id } });
 
 	res.send(project);
 });
@@ -51,9 +54,20 @@ router.put('/:id', async (req, res) => {
 
 // DELETE specified project
 router.delete('/:id', async (req, res) => {
-	const project = await Project.findByIdAndDelete(req.params.id);
+	const project = await Project.findById(req.params.id);
 	if (!project)
 		return res.status(404).send('The project with the given ID was not found.');
+
+	await Member.deleteMany({ project: project._id });
+
+	await Task.deleteMany({ project: project._id });
+
+	await User.updateMany(
+		{ projects: project._id },
+		{ $pull: { projects: project._id } }
+	);
+
+	await project.deleteOne();
 
 	res.send(project);
 });
