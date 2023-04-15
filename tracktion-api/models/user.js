@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-	name: {
-		type: String,
-		required: true,
-	},
 	email: {
 		type: String,
 		required: true,
 		unique: true,
+		match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
 	},
 	password: {
 		type: String,
 		required: true,
+		minLength: 10,
 	},
 	projects: [
 		{
@@ -20,6 +18,12 @@ const userSchema = new mongoose.Schema({
 			ref: 'Project',
 		},
 	],
+	name: {
+		type: String,
+		required: true,
+		minLength: 1,
+		maxLength: 50,
+	},
 });
 
 const User = mongoose.model('User', userSchema);

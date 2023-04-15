@@ -1,44 +1,54 @@
 const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema({
-	name: {
-		type: String,
-		required: true,
-	},
-    summary: String,
-    status: {
-		type: String,
-		default: "TO-DO",
-	},
-    priority: {
-		type: String,
-		default: "None",
-	},
-	taskNumber: {
-		type: Number,
-		required: true,
-	},
-	xpReward: {
-		type: Number,
-		required: true,
-	},
 	dateCreated: {
 		type: Date,
 		default: Date.now,
+		immutable: true,
 	},
 	dateModified: {
 		type: Date,
 		default: Date.now,
+	},
+	name: {
+		type: String,
+		required: true,
+		maxLength: 100,
+		minLength: 1,
+	},
+	priority: {
+		type: String,
+		enum: ['High', 'Medium', 'Low', 'None'],
+		default: 'None',
+	},
+	project: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Project',
+		required: true,
+	},
+	status: {
+		type: String,
+		enum: ['To-do', 'Doing', 'Done'],
+		default: 'To-do',
+	},
+	summary: {
+		type: String,
+		maxLength: 1024,
+	},
+	taskNumber: {
+		type: Number,
+		required: true,
+		min: 0,
 	},
 	taskTackler: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Member',
 		default: null,
 	},
-	project: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Project',
+	xpReward: {
+		type: Number,
 		required: true,
+		min: 0,
 	},
 });
 
