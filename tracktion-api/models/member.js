@@ -14,6 +14,10 @@ const memberSchema = new mongoose.Schema({
 		ref: 'User',
 		required: true,
 	},
+	xpCap: {
+		type: Number,
+		default: 20,
+	},
 	project: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Project',
