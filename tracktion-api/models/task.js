@@ -32,7 +32,7 @@ const taskSchema = new mongoose.Schema({
 	},
 	taskTackler: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User',
+		ref: 'Member',
 		default: null,
 	},
 	project: {
