@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Joi = require('joi');
 
 const projectSchema = new mongoose.Schema({
 	description: {
@@ -41,6 +42,8 @@ const projectSchema = new mongoose.Schema({
 	],
 });
 
+const Project = mongoose.model('Project', projectSchema);
+
 async function generateJoinCode() {
 	let code;
 	do {
@@ -52,7 +55,20 @@ async function generateJoinCode() {
 	return code;
 }
 
-const Project = mongoose.model('Project', projectSchema);
+function validateProject(project) {
+	const schema = Joi.object({
+		description: Joi.string().max(1024).required(),
+		joinCode: Joi.string().required().unique(),
+		members: Joi.array().items(Joi.string()),
+		name: Joi.string().min(1).max(50).required(),
+		owner: Joi.string().required(),
+		taskCounter: Joi.number().min(0),
+		tasks: Joi.array().items(Joi.string()),
+	});
+
+	return schema.validate(project);
+}
 
 exports.Project = Project;
 exports.generateJoinCode = generateJoinCode;
+exports.validate = validateProject;

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const { Project, generateJoinCode } = require('../models/project');
+const { Project, generateJoinCode, validate } = require('../models/project');
 const { Member } = require('../models/member');
 const { User } = require('../models/user');
 const { Task } = require('../models/task');
@@ -16,6 +16,9 @@ router.get('/:id', async (req, res) => {
 
 // POST new project
 router.post('/', async (req, res) => {
+	const { error } = validate(req.body);
+	if (error) return res.status(400).send(error.details[0].message);
+
 	const joinCode = await generateJoinCode();
 
 	let project = new Project({
@@ -41,6 +44,9 @@ router.post('/', async (req, res) => {
 
 // PUT specified project
 router.put('/:id', async (req, res) => {
+	const { error } = validate(req.body);
+	if (error) return res.status(400).send(error.details[0].message);
+
 	const project = await Project.findByIdAndUpdate(
 		req.params.id,
 		{ name: req.body.name, description: req.body.description },
