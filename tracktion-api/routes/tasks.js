@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const { Task } = require('../models/task');
+const { Task, validateTask } = require('../models/task');
 const { Project } = require('../models/project');
 const { Member } = require('../models/member');
 const router = express.Router();
@@ -14,7 +14,10 @@ router.get('/:id', async (req, res) => {
 
 // POST new task
 router.post('/', async (req, res) => {
-	const project = await Project.findOne({ _id: req.body.projectId });
+	const { error } = validateTask(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+	const project = await Project.findOne({ _id: req.body.project });
 	if (!project) {
 		return res.status(404).send('The project with the given ID was not found.');
 	}
@@ -36,6 +39,9 @@ router.post('/', async (req, res) => {
 
 // PUT specified task
 router.put('/:id', async (req, res) => {
+	const { error } = validateTask(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
 	const task = await Task.findByIdAndUpdate(
 		req.params.id,
 		{

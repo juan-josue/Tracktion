@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Joi = require('joi');
 
 const taskSchema = new mongoose.Schema({
 	dateCreated: {
@@ -53,4 +54,23 @@ const taskSchema = new mongoose.Schema({
 });
 
 const Task = mongoose.model('Task', taskSchema);
+
+function validateTask(task) {
+	const schema = Joi.object({
+		dateCreated: Joi.date(),
+		dateModified: Joi.date(),
+		name: Joi.string().required().max(100).min(1),
+		priority: Joi.string().valid('High', 'Medium', 'Low', 'None').default('None'),
+		project: Joi.objectId().required(),
+		status: Joi.string().valid('To-do', 'Doing', 'Done').default('To-do'),
+		summary: Joi.string().max(1024),
+		taskNumber: Joi.number().required().min(0),
+		taskTackler: Joi.objectId(),
+		xpReward: Joi.number().required().min(0),
+	});
+
+	return schema.validate(task);
+}
+
 exports.Task = Task;
+exports.validateTask = validateTask;
