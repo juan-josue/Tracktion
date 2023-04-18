@@ -71,4 +71,4 @@ function validateProject(project) {
 
 exports.Project = Project;
 exports.generateJoinCode = generateJoinCode;
-exports.validate = validateProject;
+exports.validateProject = validateProject;

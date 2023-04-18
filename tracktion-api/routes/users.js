@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const { User, validate } = require('../models/user');
+const { User, validateUser } = require('../models/user');
 const router = express.Router();
 
 // GET current user
@@ -18,7 +18,7 @@ router.get('/:id', async (req, res) => {
 
 // POST new user
 router.post('/', async (req, res) => {
-	const { error } = validate(req.body);
+	const { error } = validateUser(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
 	let user = new User({
@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
 
 // PUT specified user
 router.put('/:id', async (req, res) => {
-	const { error } = validate(req.body);
+	const { error } = validateUser(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
 	const user = await User.findByIdAndUpdate(

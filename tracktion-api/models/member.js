@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Joi = require('joi');
 
 const xpCap = 20;
 
@@ -32,4 +33,17 @@ const memberSchema = new mongoose.Schema({
 
 const Member = mongoose.model('Member', memberSchema);
 
+function validateMember(member) {
+	const schema = Joi.object({
+		level: Joi.number().integer().min(0),
+		project: Joi.objectId().required(),
+		user: Joi.objectId().required(),
+		xp: Joi.number().integer().min(0).max(xpCap),
+		xpCap: Joi.number().integer().min(0),
+	});
+
+	return schema.validate(member);
+}
+
 exports.Member = Member;
+exports.validateMember = validateMember;

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const { Project, generateJoinCode, validate } = require('../models/project');
-const { Member } = require('../models/member');
+const { Project, generateJoinCode, validateProject } = require('../models/project');
+const { Member, validateMember } = require('../models/member');
 const { User } = require('../models/user');
 const { Task } = require('../models/task');
 const router = express.Router();
@@ -16,7 +16,7 @@ router.get('/:id', async (req, res) => {
 
 // POST new project
 router.post('/', async (req, res) => {
-	const { error } = validate(req.body);
+	const { error } = validateProject(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
 	const joinCode = await generateJoinCode();
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
 
 // PUT specified project
 router.put('/:id', async (req, res) => {
-	const { error } = validate(req.body);
+	const { error } = validateProject(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
 	const project = await Project.findByIdAndUpdate(
@@ -84,15 +84,18 @@ router.post('/members', async (req, res) => {
 	if (!project)
 		return res.status(404).send('A project with the given join code was not found.');
 
+	const { error } = validateMember(req.body);
+	if (error) return res.status(400).send(error.details[0].message);
+
 	const existingMember = await Member.findOne({
 		project: project._id,
-		user: req.body.userId,
+		user: req.body.user,
 	});
 	if (existingMember)
 		return res.status(400).send('The user is already a member for this project.');
 
 	let newMember = new Member({
-		user: req.body.userId,
+		user: req.body.user,
 		project: project._id,
 	});
 	newMember = await newMember.save();
