@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-Joi.objectId = require('joi-objectid')(Joi);
 
 const xpCap = 20;
 
@@ -36,8 +35,8 @@ const Member = mongoose.model('Member', memberSchema);
 
 function validateMember(member) {
 	const schema = Joi.object({
-		user: Joi.objectId().required(),
-		project: Joi.objectId().required(),
+		user: Joi.string().required(),
+		project: Joi.string().required(),
 		level: Joi.number().integer().min(0),
 		xp: Joi.number().integer().min(0).max(xpCap),
 		xpCap: Joi.number().integer().min(0),

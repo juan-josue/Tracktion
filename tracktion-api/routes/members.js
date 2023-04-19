@@ -8,32 +8,23 @@ const router = express.Router();
 // POST a new project member
 router.post('/', async (req, res) => {
 	let project = await Project.findOne({ joinCode: req.body.joinCode });
-	if (!project)
-		return res.status(404).send('A project with the given joinCode was not found.');
+	if (!project) return res.status(404).send('A project with the given joinCode was not found.');
 
-	const existingMember = await Member.findOne({
-		project: project._id,
-		user: req.body.user,
-	});
-	if (existingMember)
-		return res.status(400).send('The user is already a member for this project.');
+	const { error } = validateMember({ user: req.body.user, project: project._id.toString() });
+	if (error) return res.status(400).send(error.details[0].message);
 
-	let newMember = new Member({
-		user: req.body.user,
-		project: project._id,
-	});
+	const existingMember = await Member.findOne({ project: project._id, user: req.body.user });
+	if (existingMember) return res.status(400).send('The user is already a member for this project.');
+
+	let newMember = new Member({ user: req.body.user, project: project._id });
 	newMember = await newMember.save();
-
-    // const { error } = validateMember(newMember);
-	// if (error) return res.status(400).send(error.details[0].message);
 
 	const user = await User.findById(newMember.user);
 	if (!user) return res.status(404).send('The user with the given ID was not found.');
 	user.projects.push(project._id);
 	await user.save();
 
-	project.members.push(newMember._id);
-	await project.save();
+	await Project.findByIdAndUpdate(project._id, { $push: { members: newMember._id } });
 
 	res.send(newMember);
 });
@@ -41,12 +32,10 @@ router.post('/', async (req, res) => {
 // DELETE a member
 router.delete('/:id', async (req, res) => {
 	const member = await Member.findByIdAndDelete(req.params.id);
-	if (!member)
-		return res.status(404).send('The member with the given ID was not found.');
+	if (!member) return res.status(404).send('The member with the given ID was not found.');
 
 	const project = await Project.findById(member.project);
-	if (!project)
-		return res.status(404).send('The project with the given ID was not found.');
+	if (!project) return res.status(404).send('The project with the given ID was not found.');
 	project.members.pull(member._id);
 	await project.save();
 
