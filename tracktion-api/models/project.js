@@ -45,21 +45,19 @@ const projectSchema = new mongoose.Schema({
 const Project = mongoose.model('Project', projectSchema);
 
 async function generateJoinCode() {
-	let code;
+	let newCode;
 	do {
-		code =
+		newCode =
 			Math.random().toString(36).substring(2, 6).toUpperCase() +
 			'-' +
 			Math.random().toString(36).substring(2, 6).toUpperCase();
-	} while (await Project.findOne({ code: code }));
-	return code;
+	} while (await Project.findOne({ joinCode: newCode }));
+	return newCode;
 }
 
 function validateProject(project) {
 	const schema = Joi.object({
 		description: Joi.string().max(1024).required(),
-		joinCode: Joi.string().required().unique(),
-		members: Joi.array().items(Joi.string()),
 		name: Joi.string().min(1).max(50).required(),
 		owner: Joi.string().required(),
 		taskCounter: Joi.number().min(0),

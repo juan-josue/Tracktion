@@ -61,11 +61,11 @@ function validateTask(task) {
 		dateModified: Joi.date(),
 		name: Joi.string().required().max(100).min(1),
 		priority: Joi.string().valid('High', 'Medium', 'Low', 'None').default('None'),
-		project: Joi.objectId().required(),
+		project: Joi.string().required(),
 		status: Joi.string().valid('To-do', 'Doing', 'Done').default('To-do'),
 		summary: Joi.string().max(1024),
-		taskNumber: Joi.number().required().min(0),
-		taskTackler: Joi.objectId(),
+		taskNumber: Joi.number().min(0),
+		taskTackler: Joi.string(),
 		xpReward: Joi.number().required().min(0),
 	});
 
