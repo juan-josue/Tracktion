@@ -15,7 +15,7 @@ router.get('/:id', async (req, res) => {
 // POST new task
 router.post('/', async (req, res) => {
 	const { error } = validateTask(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+	if (error) return res.status(400).send(error.details[0].message);
 
 	const project = await Project.findOne({ _id: req.body.project });
 	if (!project) {
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
 // PUT specified task
 router.put('/:id', async (req, res) => {
 	const { error } = validateTask(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+	if (error) return res.status(400).send(error.details[0].message);
 
 	const task = await Task.findByIdAndUpdate(
 		req.params.id,
@@ -66,8 +66,7 @@ router.delete('/:id', async (req, res) => {
 	if (!task) return res.status(404).send('The task with the given ID was not found.');
 
 	const project = await Project.findById(task.project);
-	if (!task)
-		return res.status(404).send('The project with the given ID was not found.');
+	if (!task) return res.status(404).send('The project with the given ID was not found.');
 
 	project.taskCounter = project.taskCounter - 1;
 	project.tasks.pull(task._id);
@@ -81,8 +80,7 @@ router.put('/:id/tackler', async (req, res) => {
 	if (!task) return res.status(404).send('The task with the given ID was not found.');
 
 	const member = await Member.findById(req.body.memberId);
-	if (!member)
-		return res.status(404).send('The member with the given ID was not found.');
+	if (!member) return res.status(404).send('The member with the given ID was not found.');
 
 	task.taskTackler = member._id;
 	await task.save();
