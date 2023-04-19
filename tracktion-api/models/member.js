@@ -35,8 +35,8 @@ const Member = mongoose.model('Member', memberSchema);
 
 function validateMember(member) {
 	const schema = Joi.object({
-		user: Joi.string().required(),
-		project: Joi.string().required(),
+		user: Joi.string(),
+		project: Joi.string(),
 		level: Joi.number().integer().min(0),
 		xp: Joi.number().integer().min(0).max(xpCap),
 		xpCap: Joi.number().integer().min(0),

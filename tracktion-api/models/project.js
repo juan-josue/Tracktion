@@ -57,9 +57,9 @@ async function generateJoinCode() {
 
 function validateProject(project) {
 	const schema = Joi.object({
-		description: Joi.string().max(1024).required(),
-		name: Joi.string().min(1).max(50).required(),
-		owner: Joi.string().required(),
+		description: Joi.string().max(1024),
+		name: Joi.string().min(1).max(50),
+		owner: Joi.string(),
 		taskCounter: Joi.number().min(0),
 		tasks: Joi.array().items(Joi.string()),
 	});

@@ -59,15 +59,15 @@ function validateTask(task) {
 	const schema = Joi.object({
 		dateCreated: Joi.date(),
 		dateModified: Joi.date(),
-		name: Joi.string().required().max(100).min(1),
+		name: Joi.string().max(100).min(1),
 		priority: Joi.string().valid('High', 'Medium', 'Low', 'None').default('None'),
-		project: Joi.string().required(),
+		project: Joi.string(),
 		status: Joi.string().valid('To-do', 'Doing', 'Done').default('To-do'),
 		summary: Joi.string().max(1024),
 		taskNumber: Joi.number().min(0),
 		taskTackler: Joi.string(),
-		xpReward: Joi.number().required().min(0),
-	});
+		xpReward: Joi.number().min(0),
+	}).options({ allowUnknown: true });
 
 	return schema.validate(task);
 }
