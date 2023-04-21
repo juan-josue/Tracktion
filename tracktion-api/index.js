@@ -3,6 +3,7 @@ const users = require('./routes/users');
 const projects = require('./routes/projects');
 const tasks = require('./routes/tasks');
 const members = require('./routes/members');
+const auth = require('./routes/auth');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const express = require('express');
@@ -14,6 +15,7 @@ app.use('/api/users', users);
 app.use('/api/projects', projects);
 app.use('/api/tasks', tasks);
 app.use('/api/members', members);
+app.use('/api/auth', auth);
 
 // Define the port to listen on
 const port = process.env.PORT || 3000;
