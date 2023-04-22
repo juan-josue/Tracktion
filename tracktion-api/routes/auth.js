@@ -4,12 +4,13 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const express = require('express');
 const { User } = require('../models/user');
+const authenticateToken = require('../middleware/auth');
 const router = express.Router();
 
 //GET login test
 router.get('/', authenticateToken, (req, res) => {
 	res.send(req.user);
-})
+});
 
 // POST login request
 router.post('/', async (req, res) => {
@@ -33,18 +34,6 @@ function validate(req) {
 	});
 
 	return schema.validate(req);
-}
-
-function authenticateToken(req, res, next) {
-	const authHeader = req.headers['authorization'];
-	const token = authHeader && authHeader.split(' ')[1];
-	if (!token) return res.status(401).send('Access denied. No token provided.');
-
-	jwt.verify(token, process.env.AUTH_TOKEN_SECRET, (err, user) => {
-		if (err) return res.status(403).send('Access denied. Invalid token provided.');
-		req.user = user;
-		next();
-	});
 }
 
 module.exports = router;
