@@ -6,6 +6,11 @@ const express = require('express');
 const { User } = require('../models/user');
 const router = express.Router();
 
+//GET login test
+router.get('/', authenticateToken, (req, res) => {
+	res.send(req.user);
+})
+
 // POST login request
 router.post('/', async (req, res) => {
 	const { error } = validate(req.body);
@@ -17,7 +22,7 @@ router.post('/', async (req, res) => {
 	const validPassword = await bcrypt.compare(req.body.password, user.password);
 	if (!validPassword) return res.status(400).send('Invalid email or password.');
 
-	const authToken = jwt.sign({ _id: user._id }, process.env.AUTH_TOKEN_SECRET);
+	const authToken = user.generateAuthToken();
 	res.send({ authToken: authToken });
 });
 
