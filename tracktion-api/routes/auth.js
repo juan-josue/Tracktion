@@ -17,8 +17,8 @@ router.post('/', async (req, res) => {
 	const validPassword = await bcrypt.compare(req.body.password, user.password);
 	if (!validPassword) return res.status(400).send('Invalid email or password.');
 
-    const token = jwt.sign({ _id: user._id }, 'jwtPrivateKey');
-	res.send(token);
+	const authToken = jwt.sign({ _id: user._id }, process.env.AUTH_TOKEN_SECRET);
+	res.send({ authToken: authToken });
 });
 
 function validate(req) {
@@ -28,6 +28,18 @@ function validate(req) {
 	});
 
 	return schema.validate(req);
+}
+
+function authenticateToken(req, res, next) {
+	const authHeader = req.headers['authorization'];
+	const token = authHeader && authHeader.split(' ')[1];
+	if (!token) return res.status(401).send('Access denied. No token provided.');
+
+	jwt.verify(token, process.env.AUTH_TOKEN_SECRET, (err, user) => {
+		if (err) return res.status(403).send('Access denied. Invalid token provided.');
+		req.user = user;
+		next();
+	});
 }
 
 module.exports = router;
