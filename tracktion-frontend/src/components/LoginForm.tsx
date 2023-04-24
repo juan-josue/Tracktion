@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 
 const LoginForm = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
-            const response = await axios.post('http://localhost:3000/api/auth', {
-              email,
-              password,
-            });
-            console.log(response.data);
-          } catch (error) {
-            console.error(error);
-          }
-    };
+			const response = await axios.post('http://localhost:3000/api/auth', {
+				email,
+				password,
+			});
+			console.log(response.data);
+			setErrorMessage('');
+		} catch (error) {
+			const err = error as AxiosError;
+			console.error(err.message);
+			setErrorMessage('Invalid username or password.');
+		}
+	};
 
 	return (
 		<>
@@ -50,6 +54,11 @@ const LoginForm = () => {
 					<Button variant="contained" type="submit" sx={{ width: '50%' }}>
 						Sign In
 					</Button>
+					{errorMessage && (
+						<Typography variant="body1" color="error">
+							{errorMessage}
+						</Typography>
+					)}
 				</Stack>
 			</form>
 			<Typography variant="body1">
