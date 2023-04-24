@@ -6,11 +6,13 @@ const members = require('./routes/members');
 const auth = require('./routes/auth');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const cors = require('cors');
 const express = require('express');
 const app = express();
 
 app.use(morgan('tiny'));
 app.use(express.json());
+app.use(cors());
 app.use('/api/users', users);
 app.use('/api/projects', projects);
 app.use('/api/tasks', tasks);
