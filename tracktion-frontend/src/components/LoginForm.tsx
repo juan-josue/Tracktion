@@ -10,16 +10,22 @@ const LoginForm = () => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
-			const response = await axios.post('http://localhost:3000/api/auth', {
+			const response = await axios.post('http://localhost:3000/api/auth/login', {
 				email,
 				password,
 			});
-			console.log(response.data);
+			const tokens = response?.data;
+			localStorage.setItem('access_token', tokens.accessToken);
+			localStorage.setItem('refresh_token', tokens.refreshToken);
+			console.log(tokens);
 			setErrorMessage('');
 		} catch (error) {
 			const err = error as AxiosError;
-			console.error(err.message);
-			setErrorMessage('Invalid username or password.');
+			if (!err.response) {
+				setErrorMessage('No server response.');
+			} else {
+				setErrorMessage('Invalid username or password.');
+			}
 		}
 	};
 
