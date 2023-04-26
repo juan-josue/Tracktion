@@ -1,4 +1,4 @@
-import { Box, Grid, List, Stack, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import SideBar from './components/SideBar';
 import { useState } from 'react';
 
@@ -24,13 +24,16 @@ const Projects = () => {
 						</Grid>
 					</Grid>
 					<Grid item xs={12} height={{ xs: '30%', md: '40%' }} bgcolor={'tomato'}>
-						<Typography variant="h5" mb={2}>All your projects</Typography>
-                        <List>
-                            <Box bgcolor={'slateblue'} height={'150px'} width={'150px'}></Box>
-                            <Box bgcolor={'slateblue'} height={'150px'} width={'150px'}></Box>
-                            <Box bgcolor={'slateblue'} height={'150px'} width={'150px'}></Box>
-                            <Box bgcolor={'slateblue'} height={'150px'} width={'150px'}></Box>
-                        </List>
+						<Typography variant="h5" mb={2}>
+							All your projects
+						</Typography>
+						<Box display={'flex'} overflow={'scroll'} sx={{overflowY: 'hidden'}}>
+							<Box borderRadius={'15px'} bgcolor="slateblue" ml={3} mr={3} height={175} width={175} flexShrink={0}/>
+							<Box borderRadius={'15px'} bgcolor="slateblue" ml={3} mr={3} height={175} width={175} flexShrink={0}/>
+							<Box borderRadius={'15px'} bgcolor="slateblue" ml={3} mr={3} height={175} width={175} flexShrink={0}/>
+							<Box borderRadius={'15px'} bgcolor="slateblue" ml={3} mr={3} height={175} width={175} flexShrink={0}/>
+							<Box borderRadius={'15px'} bgcolor="slateblue" ml={3} mr={3} height={175} width={175} flexShrink={0}/>
+						</Box>
 					</Grid>
 				</Grid>
 			</Grid>
