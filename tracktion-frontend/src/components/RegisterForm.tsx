@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const RegisterForm = () => {
 	const [email, setEmail] = useState('');
@@ -16,10 +17,10 @@ const RegisterForm = () => {
 			<Stack direction="column" spacing={1} mb={8} sx={{ width: '60%' }}>
 				<Typography variant="h4">Create Your Tracktion Account!</Typography>
 				<Typography variant="body1">
-					Already got one?{' '}
-					<Box component="span" color="yellow">
+					Already got one?
+					<Link to="/login" color="yellow">
 						{' Log in'}
-					</Box>
+					</Link>
 				</Typography>
 			</Stack>
 			<form onSubmit={handleSubmit} style={{ width: '60%' }}>
@@ -32,7 +33,7 @@ const RegisterForm = () => {
 							variant="filled"
 							type="email"
 							required
-                            sx={{ flex: 1 }}
+							sx={{ flex: 1 }}
 						>
 							First Name
 						</TextField>
@@ -43,7 +44,7 @@ const RegisterForm = () => {
 							variant="filled"
 							type="email"
 							required
-                            sx={{ flex: 1 }}
+							sx={{ flex: 1 }}
 						>
 							Last Name
 						</TextField>
@@ -73,7 +74,7 @@ const RegisterForm = () => {
 						type="submit"
 						sx={{ width: '50%', bgcolor: 'secondary.dark' }}
 					>
-						Sign In
+						Create Account
 					</Button>
 					{errorMessage && (
 						<Typography variant="body1" color="error">

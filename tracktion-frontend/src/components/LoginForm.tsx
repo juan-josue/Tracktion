@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
 	const [email, setEmail] = useState('');
@@ -69,9 +70,9 @@ const LoginForm = () => {
 			</form>
 			<Typography variant="body1">
 				Don't have an account?
-				<Box component="span" color="purple">
+				<Link to='/register' color="purple">
 					{' Sign up'}
-				</Box>
+				</Link>
 			</Typography>
 		</>
 	);
