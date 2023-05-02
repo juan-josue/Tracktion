@@ -1,5 +1,5 @@
 import { Grid, Box } from '@mui/material';
-import RegisterForm from '../../components/RegisterForm';
+import RegisterForm from './RegisterForm';
 
 const Register = () => {
 	return (

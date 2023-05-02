@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { Button, Stack, TextField, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
 	const [email, setEmail] = useState('');
@@ -32,10 +31,6 @@ const LoginForm = () => {
 
 	return (
 		<>
-			<Stack direction="column" spacing={1} mb={8} sx={{ width: '60%' }}>
-				<Typography variant="h4">Hey, Welcome Back to Tracktion!</Typography>
-				<Typography variant="body1">You can sign into your account here</Typography>
-			</Stack>
 			<form onSubmit={handleSubmit} style={{ width: '60%' }}>
 				<Stack direction="column" spacing={3} mb={6}>
 					<TextField
@@ -44,6 +39,12 @@ const LoginForm = () => {
 						label="Email"
 						variant="filled"
 						type="email"
+						sx={{
+							bgcolor: 'bg.light',
+							borderRadius: '5px 5px 0 0',
+							input: { color: 'typography.main' },
+							label: { color: 'typography.main' },
+						}}
 						required
 					>
 						Email
@@ -54,6 +55,12 @@ const LoginForm = () => {
 						label="Password"
 						variant="filled"
 						type="password"
+						sx={{
+							bgcolor: 'bg.light',
+							borderRadius: '5px 5px 0 0',
+							input: { color: 'typography.main' },
+							label: { color: 'typography.main' },
+						}}
 						required
 					>
 						Password
@@ -68,12 +75,6 @@ const LoginForm = () => {
 					)}
 				</Stack>
 			</form>
-			<Typography variant="body1">
-				Don't have an account?
-				<Link to='/register' color="purple">
-					{' Sign up'}
-				</Link>
-			</Typography>
 		</>
 	);
 };
