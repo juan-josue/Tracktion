@@ -33,6 +33,7 @@ const LoginForm = () => {
 		<>
 			<form onSubmit={handleSubmit} style={{ width: '60%' }}>
 				<Stack direction="column" spacing={3} mb={6}>
+					<TextField type="email" label="test"></TextField>
 					<TextField
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -65,7 +66,7 @@ const LoginForm = () => {
 					>
 						Password
 					</TextField>
-					<Button variant="contained" type="submit" sx={{ width: '50%' }}>
+					<Button variant="contained" className="glow" type="submit" sx={{ width: '50%' }}>
 						Sign In
 					</Button>
 					{errorMessage && (
