@@ -3,7 +3,8 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Projects from './pages/Projects';
-import theme from './theme'
+import theme from './theme';
+import './index.css';
 
 function App() {
 	return (
