@@ -1,53 +1,101 @@
-import { Box, Grid, Typography } from '@mui/material';
-import SideBar from '../../components/SideBar';
-import { useState } from 'react';
+import { Box, Button, Grid, Stack, Typography } from '@mui/material';
+import PlayIcon from '@mui/icons-material/PlayCircle';
+// import { useState } from 'react';
+import ProjectBox from './ProjectBox';
 
 const Projects = () => {
-	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+	// const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
 	return (
 		<>
-			<Grid container height="100vh" width="100%">
-				<Grid item xs={12} bgcolor={'primary.dark'} height={'50px'}>
-					<SideBar isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
-				</Grid>
-				<Grid container item xs={12} bgcolor={'bg.dark'} height={'calc(100% - 50px)'}>
-					<Grid item xs={12} lg={6} height={{ xs: '35%', lg: '60%' }} bgcolor="bg.dark">
-						<Typography variant="h5" color='typography.main'>Current Project Selection</Typography>
-						<Box
-							borderRadius={'15px'}
-							bgcolor="primary.main"
-							ml={3}
-							mr={3}
-							height={{ xs: '250px', lg: '400px' }}
-							width={{ xs: '250px', lg: '400px' }}
-							flexShrink={0}
-						/>
+			{/* <Grid item xs={12} bgcolor={'primary.dark'} height={'50px'}>
+				<SideBar isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
+			</Grid> */}
+			<Grid container height="100vh" width="100%" bgcolor="bg.dark">
+				{/* project selection */}
+				<Grid
+					container
+					item
+					xs={12}
+					md={8}
+					lg={9}
+					p={4}
+					order={{ xs: 2, md: 1 }}
+					height={{ xs: '60%', md: '100%' }}
+				>
+					{/* user banner */}
+					<Grid
+						item
+						xs={12}
+						height="25%"
+						pb="20px"
+						sx={{ boxSizing: 'border-box', display: { xs: 'none', md: 'block' } }}
+					>
+						<Box height="100%" width="100%" borderRadius="15px" bgcolor="secondary.main"></Box>
 					</Grid>
-					<Grid container item xs={12} lg={6} height={{ xs: '35%', lg: '60%' }} bgcolor="bg.dark">
-						<Grid item xs={12} bgcolor="bg.dark">
-							<Typography variant="h5" color='typography.main'>Join a project</Typography>
+					{/* new and join project forms */}
+					<Grid container item xs={12} height={{ xs: '55%', md: '30%' }}>
+						{/* new project */}
+						<Grid item xs={12} md={5} bgcolor="bg.dark">
+							<Typography variant="h4" color="typography.main">
+								Create a new project
+							</Typography>
 						</Grid>
-						<Grid item xs={12} bgcolor="bg.dark">
-							<Typography variant="h5" color='typography.main'>Create a project</Typography>
+						{/* join project */}
+						<Grid item xs={12} md={5} bgcolor="bg.dark">
+							<Typography variant="h4" color="typography.main">
+								Join an existing project
+							</Typography>
 						</Grid>
 					</Grid>
-					<Grid item xs={12} height={{ xs: '30%', md: '40%' }} bgcolor={'primary'}>
-						<Typography variant="h5" mb={2} color='typography.main'>
-							All your projects
+					{/* user projects list */}
+					<Grid item xs={12} height="45%">
+						<Typography variant="h4" color="typography.main">
+							Your project list
 						</Typography>
-						<Box display={'flex'} overflow={'scroll'} sx={{ overflowY: 'hidden' }}>
-							<Box
-								borderRadius={'15px'}
-								bgcolor="primary.main"
-								ml={3}
-								mr={3}
-								height={175}
-								width={175}
-								flexShrink={0}
-							/>
-						</Box>
+						<Stack direction="row" spacing={5} mt={2} sx={{ overflowY: 'hidden' }}>
+							<ProjectBox></ProjectBox>
+							<ProjectBox></ProjectBox>
+							<ProjectBox></ProjectBox>
+							<ProjectBox></ProjectBox>
+							<ProjectBox></ProjectBox>
+							<ProjectBox></ProjectBox>
+						</Stack>
 					</Grid>
+				</Grid>
+				{/* selected project */}
+				<Grid
+					item
+					xs={12}
+					md={4}
+					lg={3}
+					order={{ xs: 1, md: 2 }}
+					p={4}
+					height={{ xs: '40%', md: '100%' }}
+					bgcolor="bg.main"
+				>
+					<Typography variant="h4" color="typography.main">
+						Current selection
+					</Typography>
+					<Box my={3} display="flex" justifyContent="center">
+						<ProjectBox></ProjectBox>
+					</Box>
+					<Box display={{ xs: 'none', md: 'block' }}>
+						<Typography variant="h4" color="typography.main">
+							Project description
+						</Typography>
+						<Typography variant="body1" color="typography.main">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe nisi rerum
+							similique doloribus ut magni? Illo, sunt libero maxime, itaque voluptates
+							reiciendis nostrum doloribus perferendis porro suscipit quibusdam. Facilis fugit
+							incidunt aut deserunt at similique corporis repellendus veniam eius illum?
+						</Typography>
+					</Box>
+					<Box display="flex" justifyContent={{ xs: 'center', md: 'left' }} mt={3}>
+						<Button variant="contained" color="secondary" size="large" endIcon={<PlayIcon />}>
+							Play Project
+						</Button>
+					</Box>
 				</Grid>
 			</Grid>
 		</>
