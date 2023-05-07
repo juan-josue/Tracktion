@@ -1,8 +1,10 @@
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import PlayIcon from '@mui/icons-material/PlayCircle';
-import { useEffect, useState } from 'react';
 import ProjectBox from './ProjectBox';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import refreshAccessToken from '../../util/refreshToken';
+import { useNavigate } from 'react-router-dom';
 
 interface User {
 	_id: string;
@@ -14,27 +16,50 @@ interface User {
 const Projects = () => {
 	// const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const [user, setUser] = useState<User | null>(null);
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		const access_token = localStorage.getItem('access_token');
-		console.log(access_token);
-		if (access_token) {
-			axios
-				.get('http://localhost:3000/api/users/me', {
-					headers: {
-						Authorization: `Bearer ${access_token}`,
-					},
-				})
-				.then((response) => {
-					const user = response.data.user as User;
-					setUser(user);
-					console.log(user);
-				})
-				.catch((error) => {
-					console.error(error);
-				});
+		const accessToken = localStorage.getItem('access_token');
+		if (!accessToken) {
+			navigate('/login');
+			return;
 		}
-	}, []);
+
+		const fetchData = async () => {
+			try {
+				const { data } = await axios.get('http://localhost:3000/api/users/me', {
+					headers: {
+						Authorization: `Bearer ${accessToken}`,
+					},
+				});
+				setUser(data.user);
+			} catch (error) {
+				if (axios.isAxiosError(error) && error.response?.status === 401) {
+					console.log('expired token probably');
+					const refreshToken = localStorage.getItem('refresh_token');
+					if (!refreshToken) {
+						console.error('Refresh token is null');
+						return;
+					}
+					const newAccessToken = await refreshAccessToken(refreshToken);
+					if (!newAccessToken) {
+						console.error('Could not refresh access token');
+						return;
+					}
+					const { data } = await axios.get('/api/user/me', {
+						headers: {
+							Authorization: `Bearer ${newAccessToken}`,
+						},
+					});
+					setUser(data.user);
+				} else {
+					console.error(error);
+				}
+			}
+		};
+
+		fetchData();
+	}, [navigate]);
 
 	return (
 		<>
