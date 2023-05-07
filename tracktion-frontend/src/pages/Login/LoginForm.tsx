@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { Button, Stack, TextField, Typography } from '@mui/material';
 
 const LoginForm = () => {
+	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
@@ -19,6 +21,7 @@ const LoginForm = () => {
 			localStorage.setItem('refresh_token', tokens.refreshToken);
 			console.log(tokens);
 			setErrorMessage('');
+			navigate('/projects');
 		} catch (error) {
 			const err = error as AxiosError;
 			if (!err.response) {

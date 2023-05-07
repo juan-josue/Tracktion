@@ -1,10 +1,40 @@
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import PlayIcon from '@mui/icons-material/PlayCircle';
-// import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProjectBox from './ProjectBox';
+import axios from 'axios';
+
+interface User {
+	_id: string;
+	name: string;
+	email: string;
+	projects: string[];
+}
 
 const Projects = () => {
 	// const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+	const [user, setUser] = useState<User | null>(null);
+
+	useEffect(() => {
+		const access_token = localStorage.getItem('access_token');
+		console.log(access_token);
+		if (access_token) {
+			axios
+				.get('http://localhost:3000/api/users/me', {
+					headers: {
+						Authorization: `Bearer ${access_token}`,
+					},
+				})
+				.then((response) => {
+					const user = response.data.user as User;
+					setUser(user);
+					console.log(user);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		}
+	}, []);
 
 	return (
 		<>
@@ -28,10 +58,16 @@ const Projects = () => {
 						item
 						xs={12}
 						height="25%"
-						pb="20px"
+						pb={3}
 						sx={{ boxSizing: 'border-box', display: { xs: 'none', md: 'block' } }}
 					>
-						<Box height="100%" width="100%" borderRadius="15px" bgcolor="secondary.main"></Box>
+						<Box height="100%" width="100%" p={2} borderRadius="15px" bgcolor="secondary.main">
+							{user && (
+								<Typography variant="h4" color="typography.main">
+									Welcome, {user.name}!
+								</Typography>
+							)}
+						</Box>
 					</Grid>
 					{/* new and join project forms */}
 					<Grid container item xs={12} height={{ xs: '55%', md: '30%' }}>
@@ -54,11 +90,6 @@ const Projects = () => {
 							Your project list
 						</Typography>
 						<Stack direction="row" spacing={5} mt={2} sx={{ overflowY: 'hidden' }}>
-							<ProjectBox></ProjectBox>
-							<ProjectBox></ProjectBox>
-							<ProjectBox></ProjectBox>
-							<ProjectBox></ProjectBox>
-							<ProjectBox></ProjectBox>
 							<ProjectBox></ProjectBox>
 						</Stack>
 					</Grid>
