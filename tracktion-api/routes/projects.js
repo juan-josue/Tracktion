@@ -13,6 +13,15 @@ router.get('/:id', async (req, res) => {
 	res.send(project);
 });
 
+// GET projects by in the provided list of project ids
+router.get('/', async (req, res) => {
+	const projectIds = req.body.projectIds;
+	const projects = await Project.find({
+		_id: { $in: projectIds },
+	});
+	res.send(projects);
+});
+
 // POST new project
 router.post('/', async (req, res) => {
 	const { error } = validateProject(req.body);
