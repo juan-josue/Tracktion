@@ -5,20 +5,8 @@ import apiClient from '../../services/apiClient';
 import ProjectList from './ProjectList';
 import ProjectSelection from './ProjectSelection';
 import UserBanner from './UserBanner';
+import { Project, User } from '../../types/types';
 
-interface Project {
-	_id: string;
-	description: string;
-	joinCode: string;
-	name: string;
-	owner: string;
-}
-
-interface User {
-	_id: string;
-	name: string;
-	projects: string[];
-}
 
 interface FetchUserResponse {
 	user: User;
@@ -26,7 +14,6 @@ interface FetchUserResponse {
 
 const Projects = () => {
 	const [user, setUser] = useState<User | null>(null);
-	const [projects, setProjects] = useState<Project[]>([]);
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 	const [error, setError] = useState('');
 
@@ -47,16 +34,12 @@ const Projects = () => {
 		setSelectedProject(project);
 	};
 
-	const updateProjects = (projects: Project[]) => {
-		setProjects(projects);
-	};
-
-	const projectsList = user ? <ProjectList projectIds={user.projects} updateProjects={updateProjects} onProjectCardClick={handleProjectCardClick} /> : null;
+	const projectsList = user ? <ProjectList projectIds={user.projects} onProjectCardClick={handleProjectCardClick}  /> : null;
 	const projectSelectionArea = selectedProject ? <ProjectSelection selectedProject={selectedProject} /> : <ProjectSelection selectedProject={null} />;
 
 	return (
 		<>
-			<Grid container height="100vh" width="100%" bgcolor="bg.dark">
+			<Grid container height="100vh" minHeight="800px" width="100%" bgcolor="bg.dark">
 				<Grid container item xs={12} md={8} lg={9} p={4} order={{ xs: 2, md: 1 }} height={{ xs: '60%', md: '100%' }}>
 					<Grid item xs={12} height="25%" pb={3} sx={{ boxSizing: 'border-box', display: { xs: 'none', md: 'block' } }}>
 						<UserBanner user={user} />

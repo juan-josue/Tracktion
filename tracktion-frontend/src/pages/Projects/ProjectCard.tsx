@@ -1,12 +1,6 @@
 import { Box, Typography } from '@mui/material';
 
-interface Project {
-	_id: string;
-	description: string;
-	joinCode: string;
-	name: string;
-	owner: string;
-}
+import { Project } from '../../types/types';
 
 interface Props {
 	project: Project;

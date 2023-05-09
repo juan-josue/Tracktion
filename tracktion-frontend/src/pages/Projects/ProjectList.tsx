@@ -1,15 +1,9 @@
 import { Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
+
 import apiClient from '../../services/apiClient';
 import ProjectCard from './ProjectCard';
-
-interface Project {
-	_id: string;
-	description: string;
-	joinCode: string;
-	name: string;
-	owner: string;
-}
+import { Project } from '../../types/types';
 
 interface FetchUserResponse {
 	projects: Project[];
@@ -18,10 +12,9 @@ interface FetchUserResponse {
 interface Props {
 	projectIds: string[];
 	onProjectCardClick: (project: Project) => void;
-	updateProjects: (projects: Project[]) => void;
 }
 
-const ProjectList = ({ projectIds, onProjectCardClick, updateProjects }: Props) => {
+const ProjectList = ({ projectIds, onProjectCardClick }: Props) => {
 	const [projects, setProjects] = useState<Project[]>([]);
 	const [error, setError] = useState('');
 
@@ -43,10 +36,9 @@ const ProjectList = ({ projectIds, onProjectCardClick, updateProjects }: Props) 
 			})
 			.then((res) => {
 				setProjects(res.data.projects);
-				updateProjects(res.data.projects);
 			})
 			.catch((err) => setError(err.message));
-	}, [projectIds, updateProjects]);
+	}, [projectIds]);
 
 	return (
 		<Stack direction="row" spacing={5} mt={2} sx={{ overflowY: 'hidden' }}>
