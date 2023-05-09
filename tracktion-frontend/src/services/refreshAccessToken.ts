@@ -1,9 +1,9 @@
-import axios from 'axios';
+import apiClient from './apiClient'
 
 const refreshAccessToken = async (refreshToken: string) => {
 	console.log('attempting to refresh token...');
 	try {
-		const response = await axios.post('http://localhost:3000/api/auth/token', { token: refreshToken });
+		const response = await apiClient.post('/auth/token', { token: refreshToken });
 		const { accessToken } = response.data;
 		localStorage.setItem('access_token', accessToken);
 		return accessToken;
