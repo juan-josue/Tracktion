@@ -17,11 +17,17 @@ interface FetchUserResponse {
 
 interface Props {
 	projectIds: string[];
+	onProjectCardClick: (project: Project) => void;
+	updateProjects: (projects: Project[]) => void;
 }
 
-const ProjectList = ({ projectIds }: Props) => {
+const ProjectList = ({ projectIds, onProjectCardClick, updateProjects }: Props) => {
 	const [projects, setProjects] = useState<Project[]>([]);
 	const [error, setError] = useState('');
+
+	const handleProjectCardClick = (project: Project) => {
+		onProjectCardClick(project);
+	};
 
 	useEffect(() => {
 		const accessToken = localStorage.getItem('access_token');
@@ -35,14 +41,17 @@ const ProjectList = ({ projectIds }: Props) => {
 					Authorization: `Bearer ${accessToken}`,
 				},
 			})
-			.then((res) => setProjects(res.data.projects))
+			.then((res) => {
+				setProjects(res.data.projects);
+				updateProjects(res.data.projects);
+			})
 			.catch((err) => setError(err.message));
-	}, [projectIds]);
+	}, [projectIds, updateProjects]);
 
 	return (
 		<Stack direction="row" spacing={5} mt={2} sx={{ overflowY: 'hidden' }}>
 			{projects.map((project) => (
-				<ProjectCard key={project._id} project={project} />
+				<ProjectCard key={project._id} project={project} onClick={handleProjectCardClick}/>
 			))}
 		</Stack>
 	);

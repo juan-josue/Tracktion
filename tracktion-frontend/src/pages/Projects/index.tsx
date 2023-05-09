@@ -1,9 +1,18 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
-import PlayIcon from '@mui/icons-material/PlayCircle';
+import { Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import ProjectList from './ProjectList';
 import apiClient from '../../services/apiClient';
+import ProjectList from './ProjectList';
+import ProjectSelection from './ProjectSelection';
+import UserBanner from './UserBanner';
+
+interface Project {
+	_id: string;
+	description: string;
+	joinCode: string;
+	name: string;
+	owner: string;
+}
 
 interface User {
 	_id: string;
@@ -17,6 +26,8 @@ interface FetchUserResponse {
 
 const Projects = () => {
 	const [user, setUser] = useState<User | null>(null);
+	const [projects, setProjects] = useState<Project[]>([]);
+	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 	const [error, setError] = useState('');
 
 	useEffect(() => {
@@ -32,40 +43,24 @@ const Projects = () => {
 			.catch((err) => setError(err.message));
 	}, []);
 
-	const welcomeMessage = user ? (
-		<Typography variant="h4" color="typography.main">
-			Welcome, {user.name}!
-		</Typography>
-	) : null;
-	const projectsList = user ? <ProjectList projectIds={user.projects}></ProjectList> : null;
+	const handleProjectCardClick = (project: Project) => {
+		setSelectedProject(project);
+	};
+
+	const updateProjects = (projects: Project[]) => {
+		setProjects(projects);
+	};
+
+	const projectsList = user ? <ProjectList projectIds={user.projects} updateProjects={updateProjects} onProjectCardClick={handleProjectCardClick} /> : null;
+	const projectSelectionArea = selectedProject ? <ProjectSelection selectedProject={selectedProject} /> : <ProjectSelection selectedProject={null} />;
 
 	return (
 		<>
 			<Grid container height="100vh" width="100%" bgcolor="bg.dark">
-				{/* project selection */}
-				<Grid
-					container
-					item
-					xs={12}
-					md={8}
-					lg={9}
-					p={4}
-					order={{ xs: 2, md: 1 }}
-					height={{ xs: '60%', md: '100%' }}
-				>
-					{/* user banner */}
-					<Grid
-						item
-						xs={12}
-						height="25%"
-						pb={3}
-						sx={{ boxSizing: 'border-box', display: { xs: 'none', md: 'block' } }}
-					>
-						<Box height="100%" width="100%" p={2} borderRadius="15px" bgcolor="secondary.main">
-							{welcomeMessage}
-						</Box>
+				<Grid container item xs={12} md={8} lg={9} p={4} order={{ xs: 2, md: 1 }} height={{ xs: '60%', md: '100%' }}>
+					<Grid item xs={12} height="25%" pb={3} sx={{ boxSizing: 'border-box', display: { xs: 'none', md: 'block' } }}>
+						<UserBanner user={user} />
 					</Grid>
-					{/* new and join project forms */}
 					<Grid container item xs={12} height={{ xs: '55%', md: '30%' }}>
 						<Grid item xs={12} md={5} bgcolor="bg.dark">
 							<Typography variant="h4" color="typography.main">
@@ -78,7 +73,6 @@ const Projects = () => {
 							</Typography>
 						</Grid>
 					</Grid>
-					{/* user projects list */}
 					<Grid item xs={12} height="45%">
 						<Typography variant="h4" color="typography.main">
 							Your project list
@@ -86,39 +80,8 @@ const Projects = () => {
 						{projectsList}
 					</Grid>
 				</Grid>
-				{/* selected project */}
-				<Grid
-					item
-					xs={12}
-					md={4}
-					lg={3}
-					order={{ xs: 1, md: 2 }}
-					p={4}
-					height={{ xs: '40%', md: '100%' }}
-					bgcolor="bg.main"
-				>
-					<Typography variant="h4" color="typography.main">
-						Current selection
-					</Typography>
-					<Box my={3} display="flex" justifyContent="center">
-						{/* <ProjectBox></ProjectBox> */}
-					</Box>
-					<Box display={{ xs: 'none', md: 'block' }}>
-						<Typography variant="h4" color="typography.main">
-							Project description
-						</Typography>
-						<Typography variant="body1" color="typography.main">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe nisi rerum
-							similique doloribus ut magni? Illo, sunt libero maxime, itaque voluptates
-							reiciendis nostrum doloribus perferendis porro suscipit quibusdam. Facilis fugit
-							incidunt aut deserunt at similique corporis repellendus veniam eius illum?
-						</Typography>
-					</Box>
-					<Box display="flex" justifyContent={{ xs: 'center', md: 'left' }} mt={3}>
-						<Button variant="contained" color="secondary" size="large" endIcon={<PlayIcon />}>
-							Play Project
-						</Button>
-					</Box>
+				<Grid item xs={12} md={4} lg={3} order={{ xs: 1, md: 2 }} p={4} height={{ xs: '40%', md: '100%' }} bgcolor="bg.main">
+					{projectSelectionArea}
 				</Grid>
 			</Grid>
 		</>
