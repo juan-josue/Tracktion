@@ -2,14 +2,7 @@ import { Box, Button, Typography } from '@mui/material';
 import PlayIcon from '@mui/icons-material/PlayCircle';
 
 import ProjectCard from './ProjectCard';
-
-interface Project {
-	_id: string;
-	description: string;
-	joinCode: string;
-	name: string;
-	owner: string;
-}
+import { Project } from '../../types/types';
 
 interface Props {
 	selectedProject: Project | null;
@@ -40,7 +33,7 @@ const ProjectSelection = ({ selectedProject }: Props) => {
 					{selectedProject.description}
 				</Typography>
 			</Box>
-			<Box display="flex" justifyContent={{ xs: 'center', md: 'left' }} mt={3}>
+			<Box display="flex" justifyContent={{ xs: 'center', md: 'left' }} mt={2}>
 				<Button variant="contained" color="secondary" size="large" endIcon={<PlayIcon />}>
 					Play Project
 				</Button>

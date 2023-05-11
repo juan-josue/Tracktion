@@ -19,7 +19,6 @@ const LoginForm = () => {
 			const tokens = response?.data;
 			localStorage.setItem('access_token', tokens.accessToken);
 			localStorage.setItem('refresh_token', tokens.refreshToken);
-			console.log(tokens);
 			setErrorMessage('');
 			navigate('/projects');
 		} catch (error) {
@@ -68,10 +67,10 @@ const LoginForm = () => {
 					>
 						Password
 					</TextField>
-					<Button variant="contained" type="submit" sx={{ boxShadow: "0px 0px 30px 0px #afeb7f", width: '50%' }}>
+					<Button variant="contained" type="submit" sx={{ boxShadow: '0px 0px 30px 0px #afeb7f', width: '50%' }}>
 						Sign In
 					</Button>
-					
+
 					{errorMessage && (
 						<Typography variant="body1" color="error">
 							{errorMessage}
