@@ -71,6 +71,7 @@ const Projects = () => {
 	) : (
 		<ProjectSelection selectedProject={null} />
 	);
+	const joinProjectForm = user ? <JoinProjectForm userId={user._id} /> : null;
 
 	return (
 		<>
@@ -111,7 +112,7 @@ const Projects = () => {
 							<Typography variant="h4" color="typography.main">
 								Join A Project
 							</Typography>
-							<JoinProjectForm />
+							{joinProjectForm}
 						</Grid>
 					</Grid>
 					<Grid item xs={12} height="45%">
