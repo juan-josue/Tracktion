@@ -11,6 +11,7 @@ import ProjectList from './ProjectList';
 import ProjectSelection from './ProjectSelection';
 import NewProjectForm from './NewProjectForm';
 import JoinProjectForm from './JoinProjectForm';
+import Modal from '../../components/Modal';
 
 interface FetchUserResponse {
 	user: User;
@@ -75,7 +76,7 @@ const Projects = () => {
 
 	return (
 		<>
-			<Grid container height="100vh" minHeight="800px" width="100%" bgcolor="bg.dark">
+			<Grid container height="100vh" width="100%" bgcolor="bg.dark">
 				<Grid
 					container
 					item
@@ -84,7 +85,6 @@ const Projects = () => {
 					lg={9}
 					p={4}
 					order={{ xs: 2, md: 1 }}
-					height={{ xs: '600px', md: '100%' }}
 				>
 					<Grid
 						item
@@ -102,20 +102,20 @@ const Projects = () => {
 						xs={12}
 						height={{ xs: '55%', md: '30%' }}
 					>
-						<Grid item xs={12} md={5} bgcolor="bg.dark">
+						<Grid item xs={12} md={5}>
 							<Typography variant="h4" color="typography.main">
 								Create A New Project
 							</Typography>
-							<NewProjectForm />
+							<Modal buttonText='Create Project' content={<NewProjectForm/>}/>
 						</Grid>
-						<Grid item xs={12} md={5} bgcolor="bg.dark">
+						<Grid item xs={12} md={5}>
 							<Typography variant="h4" color="typography.main">
 								Join A Project
 							</Typography>
 							{joinProjectForm}
 						</Grid>
 					</Grid>
-					<Grid item xs={12} height="45%">
+					<Grid item xs={12}>
 						<Typography variant="h4" color="typography.main">
 							Your Project List
 						</Typography>
@@ -129,7 +129,6 @@ const Projects = () => {
 					lg={3}
 					order={{ xs: 1, md: 2 }}
 					p={4}
-					height={{ xs: '400px', md: '100%' }}
 					bgcolor="bg.main"
 				>
 					{projectSelectionArea}

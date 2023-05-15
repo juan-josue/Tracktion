@@ -1,22 +1,8 @@
-import { Box, Button } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import { Typography } from "@mui/material";
 
 const NewProjectForm = () => {
 	return (
-		<Box mt={2} pr={2} width='50%'>
-			<form>
-				<Button
-					variant="contained"
-					type="submit"
-					color="secondary"
-					size="medium"
-                    sx={{width: '100%'}}
-					endIcon={<AddIcon />}
-				>
-					New Project
-				</Button>
-			</form>
-		</Box>
+		<Typography variant='h4'>New Project Form</Typography>
 	);
 };
 

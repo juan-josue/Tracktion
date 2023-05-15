@@ -39,14 +39,8 @@ const LoginForm = () => {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						label="Email"
-						variant="filled"
+						variant="outlined"
 						type="email"
-						sx={{
-							bgcolor: 'bg.light',
-							borderRadius: '5px 5px 0 0',
-							input: { color: 'typography.main' },
-							label: { color: 'typography.main' },
-						}}
 						required
 					>
 						Email
@@ -55,14 +49,8 @@ const LoginForm = () => {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						label="Password"
-						variant="filled"
+						variant="outlined"
 						type="password"
-						sx={{
-							bgcolor: 'bg.light',
-							borderRadius: '5px 5px 0 0',
-							input: { color: 'typography.main' },
-							label: { color: 'typography.main' },
-						}}
 						required
 					>
 						Password
