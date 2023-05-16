@@ -11,8 +11,8 @@ interface Props {
 
 const JoinProjectForm = ({ userId } : Props) => {
 	const navigate = useNavigate();
-	const [error, setError] = useState('');
 	const [joinCode, setJoinCode] = useState('');
+	const [error, setError] = useState('');
 
 	function refreshPage() {
 		window.location.reload();
@@ -42,7 +42,7 @@ const JoinProjectForm = ({ userId } : Props) => {
 						// If refreshing succeeded, update local storage and retry posting member
 						localStorage.setItem('access_token', newAccessToken);
 						apiClient
-							.post('/members', {
+							.post('/members', data, {
 								headers: {
 									Authorization: `Bearer ${newAccessToken}`,
 								},

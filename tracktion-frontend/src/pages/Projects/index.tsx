@@ -73,19 +73,14 @@ const Projects = () => {
 		<ProjectSelection selectedProject={null} />
 	);
 	const joinProjectForm = user ? <JoinProjectForm userId={user._id} /> : null;
+	const createProjectButton = user ? (
+		<Modal buttonText="Create Project" content={<NewProjectForm userId={user._id} />} />
+	) : null;
 
 	return (
 		<>
 			<Grid container height="100vh" width="100%" bgcolor="bg.dark">
-				<Grid
-					container
-					item
-					xs={12}
-					md={8}
-					lg={9}
-					p={4}
-					order={{ xs: 2, md: 1 }}
-				>
+				<Grid container item xs={12} md={8} lg={9} p={4} order={{ xs: 2, md: 1 }}>
 					<Grid
 						item
 						xs={12}
@@ -106,7 +101,7 @@ const Projects = () => {
 							<Typography variant="h4" color="typography.main">
 								Create A New Project
 							</Typography>
-							<Modal buttonText='Create Project' content={<NewProjectForm/>}/>
+							{createProjectButton}
 						</Grid>
 						<Grid item xs={12} md={5}>
 							<Typography variant="h4" color="typography.main">
@@ -122,15 +117,7 @@ const Projects = () => {
 						{projectsList}
 					</Grid>
 				</Grid>
-				<Grid
-					item
-					xs={12}
-					md={4}
-					lg={3}
-					order={{ xs: 1, md: 2 }}
-					p={4}
-					bgcolor="bg.main"
-				>
+				<Grid item xs={12} md={4} lg={3} order={{ xs: 1, md: 2 }} p={4} bgcolor="bg.main">
 					{projectSelectionArea}
 				</Grid>
 			</Grid>

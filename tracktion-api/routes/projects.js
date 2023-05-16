@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const { Project, generateJoinCode, validateProject } = require('../models/project');
-const { Member, validateMember } = require('../models/member');
+const { Member } = require('../models/member');
 const { User } = require('../models/user');
 const { Task } = require('../models/task');
+const auth = require('../middleware/auth');
 const router = express.Router();
 
 // GET specified project
@@ -23,7 +24,8 @@ router.get('/', async (req, res) => {
 });
 
 // POST new project
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
+
 	const { error } = validateProject(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
@@ -32,12 +34,12 @@ router.post('/', async (req, res) => {
 	let project = new Project({
 		name: req.body.name,
 		description: req.body.description,
-		owner: req.body.owner,
+		owner: req.user._id,
 		joinCode: joinCode,
 	});
 
 	let newMember = new Member({
-		user: req.body.owner,
+		user: req.user._id,
 		project: project._id,
 	});
 	await newMember.save();
@@ -45,7 +47,7 @@ router.post('/', async (req, res) => {
 	project.members.push(newMember);
 	project = await project.save();
 
-	await User.findByIdAndUpdate(req.body.owner, { $push: { projects: project._id } });
+	await User.findByIdAndUpdate(req.user._id, { $push: { projects: project._id } });
 
 	res.send(project);
 });
