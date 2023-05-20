@@ -9,22 +9,21 @@ const theme = createTheme({
 	palette: {
 		mode: 'dark',
 		primary: {
-			main: '#AFEB7F',
+			main: '#382e7a',
 		},
 		secondary: {
-			main: '#926FB6',
+			main: '#e0def2',
+		},
+		accent: {
+			main: '#826b9e',
 		},
 		typography: {
 			dark: '#16151A',
-			main: '#FFFFFF',
-			light: '#8d8c8a',
+			main: '#e0def2',
 		},
 		bg: {
-			dark: '#16151A',
-			main: '#1A191D',
-			light: '#2F2D36',
-			lighter: '#4A4854',
-			contrastText: '#FFFFFF',
+			main: '#0E0D12',
+			light: '#15131B'
 		},
 	},
 });
@@ -39,19 +38,13 @@ declare module '@mui/material/styles' {
 	interface Palette {
 		typography: Palette['primary'];
 		bg: Palette['primary'];
+		accent: Palette['primary'];
 	}
 
 	interface PaletteOptions {
 		typography: PaletteOptions['primary'];
 		bg: PaletteOptions['primary'];
-	}
-
-	interface PaletteColor {
-		lighter?: string;
-	}
-
-	interface SimplePaletteColorOptions {
-		lighter?: string;
+		accent: PaletteOptions['primary'];
 	}
 
 	interface ThemeOptions {

@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -64,64 +64,112 @@ const Projects = () => {
 		setSelectedProject(project);
 	};
 
-	const projectsList = user ? (
-		<ProjectList projectIds={user.projects} onProjectCardClick={handleProjectCardClick} />
-	) : null;
-	const projectSelectionArea = selectedProject ? (
-		<ProjectSelection selectedProject={selectedProject} />
-	) : (
-		<ProjectSelection selectedProject={null} />
-	);
-	const joinProjectForm = user ? <JoinProjectForm userId={user._id} /> : null;
-	const createProjectButton = user ? (
-		<Modal buttonText="Create Project" content={<NewProjectForm userId={user._id} />} />
-	) : null;
+	if (!user) {
+		navigate('/login');
+		return null;
+	}
 
 	return (
-		<>
-			<Grid container height="100vh" width="100%" bgcolor="bg.dark">
-				<Grid container item xs={12} md={8} lg={9} p={4} order={{ xs: 2, md: 1 }}>
-					<Grid
-						item
-						xs={12}
-						height="25%"
-						pb={3}
-						sx={{ boxSizing: 'border-box', display: { xs: 'none', md: 'block' } }}
+		<Grid
+			container
+			minHeight="100vh"
+			height="auto"
+			bgcolor="bg.main"
+			p={2}
+			boxSizing="border-box"
+			overflow="hidden"
+		>
+			{/* project list, user banner, join and create controls */}
+			<Grid container item xs={12} md={8} lg={9} order={{ xs: 2, md: 1 }}>
+				{/* user banner */}
+				<Grid item xs={12} md={6} height={{ xs: 'auto', md: '50vh' }}>
+					<Box
+						bgcolor="primary.light"
+						p={2}
+						borderRadius="15px"
+						height={{ xs: 'auto', md: '100%' }}
+						mr={{ xs: 0, md: 2 }}
 					>
 						<UserBanner user={user} />
-					</Grid>
-					<Grid
-						container
-						item
-						pt={{ xs: 0, md: 4 }}
-						xs={12}
-						height={{ xs: '55%', md: '30%' }}
-					>
-						<Grid item xs={12} md={5}>
-							<Typography variant="h4" color="typography.main">
+					</Box>
+				</Grid>
+				{/* join and create controls */}
+				<Grid
+					container
+					item
+					xs={12}
+					md={6}
+					height="calc(50vh - 16px)"
+					mt={{ xs: 2, md: 0 }}
+					gap={2}
+				>
+					{/* create project control */}
+					<Grid item xs={12} height="40%">
+						<Box
+							display="flex"
+							flexDirection="column"
+							justifyContent="space-between"
+							bgcolor="bg.light"
+							p={2}
+							borderRadius="15px"
+							height="100%"
+						>
+							<Typography variant="h5" color="typography.main" fontWeight="bold">
 								Create A New Project
 							</Typography>
-							{createProjectButton}
-						</Grid>
-						<Grid item xs={12} md={5}>
-							<Typography variant="h4" color="typography.main">
-								Join A Project
-							</Typography>
-							{joinProjectForm}
-						</Grid>
+							<Modal
+								buttonText="Create Project"
+								content={<NewProjectForm userId={user._id} />}
+							/>
+						</Box>
 					</Grid>
-					<Grid item xs={12}>
-						<Typography variant="h4" color="typography.main">
-							Your Project List
-						</Typography>
-						{projectsList}
+					{/* join project control */}
+					<Grid item xs={12} height="60%">
+						<Box
+							display="flex"
+							flexDirection="column"
+							justifyContent="space-between"
+							bgcolor="bg.light"
+							p={2}
+							borderRadius="15px"
+							height="100%"
+						>
+							<Typography variant="h5" color="typography.main" fontWeight="bold">
+								Join A Project With A Code
+							</Typography>
+							<JoinProjectForm userId={user._id} />
+						</Box>
 					</Grid>
 				</Grid>
-				<Grid item xs={12} md={4} lg={3} order={{ xs: 1, md: 2 }} p={4} bgcolor="bg.main">
-					{projectSelectionArea}
+				<Grid item xs={12} height="calc(50% - 32px)" mt={2}>
+					<Box
+						display={'flex'}
+						alignItems="center"
+						bgcolor="bg.light"
+						p={2}
+						mt={{ xs: 2, md: 0 }}
+						borderRadius="15px"
+						height={{ xs: 'auto', md: '100%' }}
+					>
+						<ProjectList
+							projectIds={user.projects}
+							onProjectCardClick={handleProjectCardClick}
+						/>
+					</Box>
 				</Grid>
 			</Grid>
-		</>
+			<Grid item xs={12} md={4} lg={3} order={{ xs: 1, md: 2 }} mb={{ xs: 2, md: 0 }}>
+				<Box
+					bgcolor="bg.light"
+					height="100%"
+					p={2}
+					borderRadius="15px"
+					ml={{ xs: 0, md: 2 }}
+				>
+					<ProjectSelection selectedProject={selectedProject ? selectedProject : null} />
+				</Box>
+			</Grid>
+		</Grid>
 	);
 };
 

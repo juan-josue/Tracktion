@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import apiClient from '../../services/apiClient';
@@ -41,9 +41,9 @@ const ProjectList = ({ projectIds, onProjectCardClick }: Props) => {
 	}, [projectIds]);
 
 	return (
-		<Stack direction="row" spacing={5} mt={2} sx={{ overflowY: 'hidden' }}>
+		<Stack direction="row" spacing={5} sx={{ overflowY: 'hidden' }}>
 			{projects.map((project) => (
-				<ProjectCard key={project._id} project={project} onClick={handleProjectCardClick}/>
+				<ProjectCard key={project._id} color='primary.main' project={project} onClick={handleProjectCardClick} />
 			))}
 		</Stack>
 	);

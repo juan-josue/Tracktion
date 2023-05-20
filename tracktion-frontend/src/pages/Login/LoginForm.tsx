@@ -55,7 +55,7 @@ const LoginForm = () => {
 					>
 						Password
 					</TextField>
-					<Button variant="contained" type="submit" sx={{ boxShadow: '0px 0px 30px 0px #afeb7f', width: '50%' }}>
+					<Button variant="contained" type="submit" sx={{ width: '50%' }}>
 						Sign In
 					</Button>
 

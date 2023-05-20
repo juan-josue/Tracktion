@@ -3,11 +3,12 @@ import { Box, Typography } from '@mui/material';
 import { Project } from '../../types/types';
 
 interface Props {
+	color: string;
 	project: Project;
 	onClick?: (project: Project) => void;
 }
 
-const ProjectCard = ({ project, onClick }: Props) => {
+const ProjectCard = ({ color, project, onClick }: Props) => {
 	const handleClick = () => {
 		if (onClick) {
 			onClick(project);
@@ -15,11 +16,11 @@ const ProjectCard = ({ project, onClick }: Props) => {
 	};
 
 	return (
-		<Box borderRadius="15px" bgcolor='secondary.main' height={{ xs: 150, md: 300 }} width={{ xs: 150, md: 300 }} maxWidth="100%" flexShrink={0} p={2} onClick={handleClick}>
-			<Typography sx={{ typography: { xs: 'h5', md: 'h3' } }} color="typography.dark">
+		<Box borderRadius="15px" bgcolor={color} height={{ xs: 150, md: 300 }} width={{ xs: 150, md: 300 }} maxWidth="100%" flexShrink={0} p={2} onClick={handleClick}>
+			<Typography sx={{ typography: { xs: 'h5', md: 'h3' } }} color="typography.main">
 				{project.name}
 			</Typography>
-			<Typography sx={{ typography: { xs: 'body1', md: 'h5' } }} color="typography.lighter">
+			<Typography sx={{ typography: { xs: 'body1', md: 'h5' } }} color="typography.main">
 				{'Join Code: ' + project.joinCode}
 			</Typography>
 		</Box>

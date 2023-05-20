@@ -2,7 +2,6 @@ import { Grid, Box, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import LoginForm from './LoginForm';
-import image from '../../assets/anime.jpg';
 
 const Login = () => {
 	return (
@@ -18,7 +17,7 @@ const Login = () => {
 						flexDirection: 'column',
 						alignItems: 'center',
 						justifyContent: 'center',
-						bgcolor: 'bg.dark',
+						bgcolor: 'bg.main',
 					}}
 				>
 					<Stack direction="column" spacing={1} mb={8} sx={{ width: '60%' }}>
@@ -37,9 +36,9 @@ const Login = () => {
 							to="/register"
 							sx={{
 								textDecoration: 'none',
-								color: 'secondary.main',
+								color: 'primary.main',
 								'&:visited': {
-									color: 'secondary.main',
+									color: 'primary.main',
 								},
 							}}
 						>
@@ -55,17 +54,14 @@ const Login = () => {
 					sx={{
 						height: { xs: '30%', md: '100%' },
 						paddingBottom: { xs: 0, md: 4 },
-						bgcolor: 'bg.dark',
+						bgcolor: 'bg.main',
 					}}
 				>
 					<Box
 						sx={{
-							bgcolor: 'bg.main',
+							bgcolor: 'primary.main',
 							height: '100%',
 							borderRadius: { xs: '15px 15px 0 0', md: '15px' },
-							backgroundImage: `url(${image})`,
-							backgroundSize: 'cover',
-							backgroundPosition: { xs: 'top', md: 'center' },
 						}}
 					></Box>
 				</Grid>

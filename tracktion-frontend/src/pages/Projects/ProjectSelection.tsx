@@ -11,8 +11,8 @@ interface Props {
 const ProjectSelection = ({ selectedProject }: Props) => {
 	if (!selectedProject) {
 		return (
-			<Typography variant="h4" color="typography.main">
-				Select a project or create a new one
+			<Typography variant="h5" color="typography.main" fontWeight='bold'>
+				Select, Join, Or Create A Project!
 			</Typography>
 		);
 	}
@@ -23,7 +23,7 @@ const ProjectSelection = ({ selectedProject }: Props) => {
 				Current selection
 			</Typography>
 			<Box my={3} display="flex" justifyContent="center">
-				<ProjectCard project={selectedProject}/>
+				<ProjectCard color='primary.light' project={selectedProject} />
 			</Box>
 			<Box display={{ xs: 'none', md: 'block' }}>
 				<Typography variant="h4" color="typography.main">

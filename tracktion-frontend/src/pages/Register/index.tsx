@@ -1,7 +1,6 @@
 import { Grid, Box, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import RegisterForm from './RegisterForm';
-import image from '../../assets/anime.jpg'
 
 const Register = () => {
 	return (
@@ -52,12 +51,9 @@ const Register = () => {
 				>
 					<Box
 						sx={{
-							bgcolor: 'bg.light',
+							bgcolor: 'parimary.main',
 							height: '100%',
 							borderRadius: { xs: '15px 15px 0 0', md: '15px' },
-							backgroundImage: `url(${image})`,
-							backgroundSize: 'cover',
-							backgroundPosition: { xs: 'top', md: 'center' },
 						}}
 					></Box>
 				</Grid>

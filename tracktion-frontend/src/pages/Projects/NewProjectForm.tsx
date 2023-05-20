@@ -70,7 +70,7 @@ const NewProjectForm = ({ userId }: Props) => {
 					type="text"
 					fullWidth
 					minRows={5}
-					variant="outlined"
+					variant="filled"
 					required
 				></TextField>
 				<TextField
@@ -81,13 +81,9 @@ const NewProjectForm = ({ userId }: Props) => {
 					multiline
 					fullWidth
 					minRows={5}
-					variant="outlined"
+					variant="filled"
 				></TextField>
-				<Button
-					variant="contained"
-					type="submit"
-					sx={{ boxShadow: '0px 0px 30px 0px #afeb7f', width: '50%' }}
-				>
+				<Button variant="contained" type="submit" color='secondary'>
 					Create Project
 				</Button>
 			</Box>

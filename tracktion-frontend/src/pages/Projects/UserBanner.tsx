@@ -18,7 +18,7 @@ const UserBanner = ({ user }: Props) => {
 	) : null;
 
 	return (
-		<Box height="100%" width="100%" p={2} borderRadius="15px" bgcolor="secondary.main">
+		<Box height="100%" width="100%" p={2} borderRadius="15px">
 			{welcomeMessage}
 		</Box>
 	);
