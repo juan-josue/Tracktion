@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Button, Stack, TextField, Typography } from '@mui/material';
+import apiClient from '../../services/apiClient';
 
 const LoginForm = () => {
 	const navigate = useNavigate();
@@ -12,7 +13,7 @@ const LoginForm = () => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
-			const response = await axios.post('http://localhost:3000/api/auth/login', {
+			const response = await apiClient.post('/auth/login', {
 				email,
 				password,
 			});

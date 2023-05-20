@@ -1,4 +1,4 @@
-import { Box, TextField, Button, Stack } from '@mui/material';
+import { TextField, Button, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,13 +12,14 @@ interface Props {
 const JoinProjectForm = ({ userId }: Props) => {
 	const navigate = useNavigate();
 	const [joinCode, setJoinCode] = useState('');
-	const [error, setError] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
 	function refreshPage() {
 		window.location.reload();
 	}
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
 		// Get access token from local storage
 		const accessToken = localStorage.getItem('access_token');
 
@@ -33,7 +34,7 @@ const JoinProjectForm = ({ userId }: Props) => {
 					Authorization: `Bearer ${accessToken}`,
 				},
 			})
-			.then((res) => refreshPage())
+			.then(() => refreshPage())
 			.catch(async (err) => {
 				// If the status is 401 (Unauthorized), try and refresh the access token
 				if (err.response.status === 401) {
@@ -47,14 +48,14 @@ const JoinProjectForm = ({ userId }: Props) => {
 									Authorization: `Bearer ${newAccessToken}`,
 								},
 							})
-							.then((res) => refreshPage())
-							.catch((err) => setError(err.message));
+							.then(() => refreshPage())
+							.catch((err) => setErrorMessage(err.message));
 					} else {
 						// If refreshing the access token failed, navigate back to login
 						navigate('/login');
 					}
 				} else {
-					setError(err.message);
+					setErrorMessage(err.message);
 				}
 			});
 	};
@@ -75,6 +76,11 @@ const JoinProjectForm = ({ userId }: Props) => {
 				<Button variant="contained" type="submit" color="secondary" size="medium">
 					Join
 				</Button>
+				{errorMessage && (
+					<Typography variant="body1" color="error">
+						{errorMessage}
+					</Typography>
+				)}
 			</Stack>
 		</form>
 	);

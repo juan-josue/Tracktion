@@ -21,7 +21,6 @@ const Projects = () => {
 	const [user, setUser] = useState<User | null>(null);
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 	const navigate = useNavigate();
-	const [error, setError] = useState('');
 
 	useEffect(() => {
 		// Get access token from local storage
@@ -49,13 +48,14 @@ const Projects = () => {
 								},
 							})
 							.then((res) => setUser(res.data.user))
-							.catch((err) => setError(err.message));
+							.catch(() => navigate('/login'));
 					} else {
 						// If refreshing the access token failed, navigate back to login
 						navigate('/login');
 					}
 				} else {
-					setError(err.message);
+					// If there was an error getting the user navigate back to login
+					navigate('/login');
 				}
 			});
 	}, [navigate]);
@@ -119,7 +119,7 @@ const Projects = () => {
 							</Typography>
 							<Modal
 								buttonText="Create Project"
-								content={<NewProjectForm userId={user._id} />}
+								content={<NewProjectForm/>}
 							/>
 						</Box>
 					</Grid>

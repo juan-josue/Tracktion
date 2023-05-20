@@ -16,7 +16,7 @@ interface Props {
 
 const ProjectList = ({ projectIds, onProjectCardClick }: Props) => {
 	const [projects, setProjects] = useState<Project[]>([]);
-	const [error, setError] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
 	const handleProjectCardClick = (project: Project) => {
 		onProjectCardClick(project);
@@ -37,15 +37,27 @@ const ProjectList = ({ projectIds, onProjectCardClick }: Props) => {
 			.then((res) => {
 				setProjects(res.data.projects);
 			})
-			.catch((err) => setError(err.message));
+			.catch((err) => setErrorMessage(err.message));
 	}, [projectIds]);
 
 	return (
-		<Stack direction="row" spacing={5} sx={{ overflowY: 'hidden' }}>
-			{projects.map((project) => (
-				<ProjectCard key={project._id} color='primary.main' project={project} onClick={handleProjectCardClick} />
-			))}
-		</Stack>
+		<>
+			{errorMessage && (
+				<Typography variant="body1" color="error">
+					{errorMessage}
+				</Typography>
+			)}
+			<Stack direction="row" spacing={5} sx={{ overflowY: 'hidden' }}>
+				{projects.map((project) => (
+					<ProjectCard
+						key={project._id}
+						color="primary.main"
+						project={project}
+						onClick={handleProjectCardClick}
+					/>
+				))}
+			</Stack>
+		</>
 	);
 };
 

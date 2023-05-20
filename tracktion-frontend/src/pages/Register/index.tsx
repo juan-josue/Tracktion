@@ -8,16 +8,14 @@ const Register = () => {
 			<Grid container height="100vh">
 				<Grid item xs={12} md={6} sx={{ height: { xs: '70%', md: '100%' } }}>
 					<Box
-						sx={{
-							bgcolor: 'bg.dark',
-							height: '100%',
-							display: 'flex',
-							flexDirection: 'column',
-							alignItems: 'center',
-							justifyContent: 'center',
-						}}
+						bgcolor="bg.main"
+						height="100%"
+						display="flex"
+						flexDirection="column"
+						alignItems="center"
+						justifyContent="center"
 					>
-						<Stack direction="column" spacing={1} mb={8} sx={{ width: '60%' }}>
+						<Stack direction="column" spacing={1} mb={8} width="60%">
 							<Typography variant="h4" color="typography.main">
 								Create Your Tracktion Account!
 							</Typography>
@@ -28,9 +26,9 @@ const Register = () => {
 									to="/login"
 									sx={{
 										textDecoration: 'none',
-										color: 'secondary.main',
+										color: 'primary.main',
 										'&:visited': {
-											color: 'secondary.main',
+											color: 'primary.main',
 										},
 									}}
 								>
@@ -46,12 +44,13 @@ const Register = () => {
 					xs={12}
 					md={6}
 					p={4}
-					bgcolor="bg.dark"
-					sx={{ height: { xs: '30%', md: '100%' }, paddingBottom: { xs: 0, md: 4 } }}
+					bgcolor="bg.main"
+					pb={{ xs: 0, md: 4 }}
+					height={{ xs: '30%', md: '100%' }}
 				>
 					<Box
 						sx={{
-							bgcolor: 'parimary.main',
+							bgcolor: 'primary.main',
 							height: '100%',
 							borderRadius: { xs: '15px 15px 0 0', md: '15px' },
 						}}
