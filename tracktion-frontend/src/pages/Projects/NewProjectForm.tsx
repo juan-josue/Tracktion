@@ -46,13 +46,13 @@ const NewProjectForm = () => {
 								},
 							})
 							.then(() => refreshPage())
-							.catch((err) => setErrorMessage(err.message));
+							.catch((err) => setErrorMessage(err.response.data));
 					} else {
 						// If refreshing the access token failed, navigate back to login
 						navigate('/login');
 					}
 				} else {
-					setErrorMessage(err.message);
+					setErrorMessage(err.response.data);
 				}
 			});
 	};
