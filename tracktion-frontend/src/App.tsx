@@ -1,10 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
+
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Projects from './pages/Projects';
+import Tasks from './pages/Tasks';
 import theme from './theme';
-import './index.css';
 
 function App() {
 	return (
@@ -15,6 +16,7 @@ function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/projects" element={<Projects />} />
+				<Route path="/tasks" element={<Tasks />} />
 			</Routes>
 		</ThemeProvider>
 	);

@@ -49,11 +49,9 @@ const Register = () => {
 					height={{ xs: '30%', md: '100%' }}
 				>
 					<Box
-						sx={{
-							bgcolor: 'primary.main',
-							height: '100%',
-							borderRadius: { xs: '15px 15px 0 0', md: '15px' },
-						}}
+						bgcolor='primary.main'
+						height='100%'
+						borderRadius={{ xs: '15px 15px 0 0', md: '15px' }}
 					></Box>
 				</Grid>
 			</Grid>

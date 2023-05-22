@@ -11,16 +11,14 @@ const Login = () => {
 					item
 					xs={12}
 					md={6}
-					sx={{
-						height: { xs: '70%', md: '100%' },
-						display: 'flex',
-						flexDirection: 'column',
-						alignItems: 'center',
-						justifyContent: 'center',
-						bgcolor: 'bg.main',
-					}}
+					height={{ xs: '70%', md: '100%' }}
+					display="flex"
+					flexDirection="column"
+					alignItems="center"
+					justifyContent="center"
+					bgcolor="bg.main"
 				>
-					<Stack direction="column" spacing={1} mb={8} sx={{ width: '60%' }}>
+					<Stack direction="column" spacing={1} mb={8} width="60%">
 						<Typography variant="h4" color="typography.main">
 							Hey, Welcome Back to Tracktion!
 						</Typography>
@@ -46,17 +44,7 @@ const Login = () => {
 						</Typography>
 					</Typography>
 				</Grid>
-				<Grid
-					item
-					xs={12}
-					md={6}
-					p={4}
-					sx={{
-						height: { xs: '30%', md: '100%' },
-						paddingBottom: { xs: 0, md: 4 },
-						bgcolor: 'bg.main',
-					}}
-				>
+				<Grid item xs={12} md={6} p={4} height={{ xs: '30%', md: '100%' }} bgcolor="bg.main" pb={{ xs: 0, md: 4 }}>
 					<Box
 						sx={{
 							bgcolor: 'primary.main',
