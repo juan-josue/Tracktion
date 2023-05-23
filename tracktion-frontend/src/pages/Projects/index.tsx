@@ -115,7 +115,7 @@ const Projects = () => {
 							height="100%"
 						>
 							<Typography variant="h5" color="typography.main" fontWeight="bold">
-								Create A New Project
+								Begin A New Odyssey
 							</Typography>
 							<Modal
 								buttonText="Create Project"
@@ -135,7 +135,7 @@ const Projects = () => {
 							height="100%"
 						>
 							<Typography variant="h5" color="typography.main" fontWeight="bold">
-								Join A Project With A Code
+								Join An Odyssey With A Code
 							</Typography>
 							<JoinProjectForm userId={user._id} />
 						</Box>

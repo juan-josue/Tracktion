@@ -98,7 +98,7 @@ const Tasks = () => {
 					</Grid>
 				</Box>
 				<Box bgcolor="bg.light" borderRadius="15px" mt={2} p={2}>
-					<Typography variant="h3">{project.name}'s Tasks</Typography>
+					<Typography variant="h3">Quests</Typography>
 					<TaskGrid tasks={project.tasks} />
 				</Box>
 			</Box>

@@ -19,7 +19,7 @@ const ProjectSelection = ({ selectedProject }: Props) => {
 	if (!selectedProject) {
 		return (
 			<Typography variant="h5" color="typography.main" fontWeight="bold">
-				Select, Join, Or Create A Project!
+				Select, Join, Or Create An Odyssey!
 			</Typography>
 		);
 	}
