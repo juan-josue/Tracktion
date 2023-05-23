@@ -6,7 +6,7 @@ export interface Project {
 	name: string;
 	owner: string;
 	taskCounter: number;
-	tasks: string[];
+	tasks: Task[];
 }
 
 export interface User {
@@ -14,4 +14,18 @@ export interface User {
 	name: string;
 	email: string;
 	projects: string[];
+}
+
+export interface Task {
+	_id: string,
+	dateCreated: Date,
+	dateModified: Date,
+	name: string,
+	priority: string,
+	project: string,
+	status: string,
+	summary: string,
+	taskNumber: number,
+	taskTackler: string,
+	xpReward: number,
 }

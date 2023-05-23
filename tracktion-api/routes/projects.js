@@ -8,8 +8,17 @@ const auth = require('../middleware/auth');
 const router = express.Router();
 
 // GET specified project
-router.get('/:id', async (req, res) => {
-	const project = await Project.findById(req.params.id);
+router.get('/:id', auth, async (req, res) => {
+	const { populateTasks } = req.query;
+
+	let query = Project.findById(req.params.id);
+
+	if (populateTasks) {
+		query = query.populate('tasks');
+	}
+
+	const project = await query.exec();
+
 	if (!project) return res.status(404).send('The project with the given ID was not found.');
 	res.send(project);
 });
@@ -25,7 +34,6 @@ router.get('/', async (req, res) => {
 
 // POST new project
 router.post('/', auth, async (req, res) => {
-
 	const { error } = validateProject(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
