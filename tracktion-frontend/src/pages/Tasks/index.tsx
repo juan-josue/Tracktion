@@ -7,6 +7,8 @@ import apiClient from '../../services/apiClient';
 import { Project } from '../../types/types';
 import refreshAccessToken from '../../services/refreshAccessToken';
 import TaskGrid from './TaskGrid';
+import Modal from '../../components/Modal';
+import NewTaskForm from './NewTaskForm';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 20,
@@ -89,16 +91,18 @@ const Tasks = () => {
 									<Typography variant="h5">14/20 XP</Typography>
 								</Stack>
 								<BorderLinearProgress variant="determinate" value={70} />
-								<Button variant="contained" color="secondary" sx={{ maxWidth: 150 }} endIcon={<AddIcon />}>
-									New Task
-								</Button>
+								<Box sx={{ maxWidth: 150 }}>
+									<Modal buttonText="New Quest" content={<NewTaskForm projectId={project._id} />} />
+								</Box>
 							</Stack>
 						</Grid>
 						<Grid item xs={12} md={6}></Grid>
 					</Grid>
 				</Box>
 				<Box bgcolor="bg.light" borderRadius="15px" mt={2} p={2}>
-					<Typography variant="h3">Quests</Typography>
+					<Typography variant="h3" mb={2}>
+						Quests
+					</Typography>
 					<TaskGrid tasks={project.tasks} />
 				</Box>
 			</Box>

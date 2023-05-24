@@ -38,7 +38,7 @@ const Modal = ({buttonText, content} : Props) => {
 						WebkitBackdropFilter: 'blur(10px)',
 					}}
 				>
-					<Box height='100%' width={{xs: '100%', md:'40%'}} position='relative' bgcolor='primary.main' p={4} pt={8} borderRadius='15px' boxShadow='0px 7px 14px 3px rgba(0,0,0,0.5);'>
+					<Box height='auto' minHeight='100%' width={{xs: '100%', sm: '80%', md:'60%', lg: '50%'}} position='relative' bgcolor='primary.main' p={4} pt={8} borderRadius='15px' boxShadow='0px 7px 14px 3px rgba(0,0,0,0.5);'>
 						<IconButton onClick={toggleModal} sx={{ position: 'absolute', top: 15, right: 15 }}>
                             <CloseIcon fontSize='large'/>
                         </IconButton>

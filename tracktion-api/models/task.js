@@ -20,7 +20,6 @@ const taskSchema = new mongoose.Schema({
 	priority: {
 		type: String,
 		enum: ['High', 'Medium', 'Low', 'None'],
-		default: 'None',
 	},
 	project: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -30,7 +29,6 @@ const taskSchema = new mongoose.Schema({
 	status: {
 		type: String,
 		enum: ['To-do', 'Doing', 'Done'],
-		default: 'To-do',
 	},
 	summary: {
 		type: String,

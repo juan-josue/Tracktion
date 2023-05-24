@@ -4,6 +4,7 @@ const { Task, validateTask } = require('../models/task');
 const { Project } = require('../models/project');
 const { Member } = require('../models/member');
 const router = express.Router();
+const auth = require('../middleware/auth');
 
 // GET specified task
 router.get('/:id', async (req, res) => {
@@ -13,7 +14,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST new task
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
 	const { error } = validateTask(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
@@ -27,12 +28,18 @@ router.post('/', async (req, res) => {
 		xpReward: req.body.xpReward,
 		taskNumber: project.taskCounter,
 		project: project._id,
+		summary: req.body.summary,
+		status: req.body.status,
+		priority: req.body.priority,
 	});
 	task = await task.save();
 
 	project.taskCounter = project.taskCounter + 1;
 	project.tasks.push(task._id);
 	project.save();
+	
+	console.log(req.body)
+	console.log(task)
 
 	res.send(task);
 });
