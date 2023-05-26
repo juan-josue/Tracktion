@@ -31,37 +31,24 @@ const Tasks = () => {
 
 	useEffect(() => {
 		const accessToken = localStorage.getItem('access_token');
-
 		apiClient
 			.get<Project>(`/projects/${projectId}`, {
-				headers: {
-					Authorization: `Bearer ${accessToken}`,
-				},
-				params: {
-					populateTasks: 'true',
-				},
+				headers: { Authorization: `Bearer ${accessToken}` },
+				params: { populateTasks: 'true' },
 			})
 			.then((res) => setProject(res.data))
 			.catch(async (err) => {
-				// If the status is 401 (Unauthorized), try and refresh the access token
-				if (err.response.status === 401) {
+				if (err.response && err.response.status === 401) {
 					const newAccessToken = await refreshAccessToken();
 					if (newAccessToken) {
-						// If refreshing succeeded, update local storage and retry posting member
-						localStorage.setItem('access_token', newAccessToken);
 						apiClient
-							.post(`/projects/${projectId}`, {
-								headers: {
-									Authorization: `Bearer ${newAccessToken}`,
-								},
-								params: {
-									populateTasks: true,
-								},
+							.get<Project>(`/projects/${projectId}`, {
+								headers: { Authorization: `Bearer ${newAccessToken}` },
+								params: { populateTasks: 'true' },
 							})
 							.then((res) => setProject(res.data))
 							.catch((err) => setErrorMessage(err.response.data));
 					} else {
-						// If refreshing the access token failed, navigate back to login
 						navigate('/login');
 					}
 				} else {
