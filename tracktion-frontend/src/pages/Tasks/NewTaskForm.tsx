@@ -47,7 +47,6 @@ const NewTaskForm = ({ projectId }: Props) => {
 			})
 			.then(() => refreshPage())
 			.catch(async (err) => {
-				console.log(err);
 				if (err.response.status === 401) {
 					const newAccessToken = await refreshAccessToken();
 					if (newAccessToken) {
