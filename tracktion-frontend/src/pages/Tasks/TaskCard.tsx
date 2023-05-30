@@ -15,6 +15,10 @@ const TaskCard = ({ task }: Props) => {
 	}
 
 	const deleteTask = () => {
+		if (!confirm('Are you sure you want to delete this Quest?')) {
+			return;
+		}
+
 		const accessToken = localStorage.getItem('access_token');
 
 		apiClient
