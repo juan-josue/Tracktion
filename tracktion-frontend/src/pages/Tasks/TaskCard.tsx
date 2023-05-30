@@ -60,6 +60,11 @@ const TaskCard = ({ task }: Props) => {
 				</IconButton>
 			</Box>
 			<Stack direction="column" spacing={1} p={2}>
+				{errorMessage && (
+					<Typography variant="body1" color="error">
+						{errorMessage}
+					</Typography>
+				)}
 				<Typography variant="h5">{task.name}</Typography>
 				<Stack direction="row" spacing={2}>
 					<Chip size="small" icon={<WhatshotIcon />} label={task.priority} variant="outlined" />
