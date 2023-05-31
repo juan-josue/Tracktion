@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { Task } from '../../types/types';
 import apiClient from '../../services/apiClient';
 import refreshAccessToken from '../../services/refreshAccessToken';
+import Modal from '../../components/Modal';
 
 interface Props {
 	task: Task;
@@ -20,6 +21,10 @@ const TaskCard = ({ task }: Props) => {
 	function refreshPage() {
 		window.location.reload();
 	}
+
+	const updateTask = () => {
+		console.log('update task!');
+	};
 
 	const deleteTask = () => {
 		if (!confirm('Are you sure you want to delete this Quest?')) {
@@ -55,9 +60,14 @@ const TaskCard = ({ task }: Props) => {
 				<IconButton onClick={deleteTask} sx={{ position: 'absolute', top: 5, right: 5 }}>
 					<CloseIcon fontSize="medium" />
 				</IconButton>
-				<IconButton sx={{ position: 'absolute', top: 45, right: 5 }}>
-					<EditIcon fontSize="medium" />
-				</IconButton>
+				<Modal
+					button={
+						<IconButton sx={{ position: 'absolute', top: 45, right: 5 }}>
+							<EditIcon fontSize="medium" />
+						</IconButton>
+					}
+					content={<h1>Test Content</h1>}
+				/>
 			</Box>
 			<Stack direction="column" spacing={1} p={2}>
 				{errorMessage && (

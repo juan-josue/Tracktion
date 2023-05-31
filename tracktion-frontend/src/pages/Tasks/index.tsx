@@ -1,14 +1,14 @@
 import { Box, Button, Grid, LinearProgress, Stack, Typography, linearProgressClasses, styled } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
-import AddIcon from '@mui/icons-material/Add';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import { useEffect, useState } from 'react';
 
 import apiClient from '../../services/apiClient';
-import { Project } from '../../types/types';
 import refreshAccessToken from '../../services/refreshAccessToken';
+import { Project } from '../../types/types';
 import TaskGrid from './TaskGrid';
-import Modal from '../../components/Modal';
 import NewTaskForm from './NewTaskForm';
+import Modal from '../../components/Modal';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 20,
@@ -79,7 +79,14 @@ const Tasks = () => {
 								</Stack>
 								<BorderLinearProgress variant="determinate" value={70} />
 								<Box sx={{ maxWidth: 150 }}>
-									<Modal buttonText="New Quest" content={<NewTaskForm projectId={project._id} />} />
+									<Modal
+										button={
+											<Button variant="contained" color="secondary" endIcon={<AddBoxIcon />}>
+												New Quest
+											</Button>
+										}
+										content={<NewTaskForm projectId={project._id} />}
+									/>
 								</Box>
 							</Stack>
 						</Grid>

@@ -1,14 +1,13 @@
-import { Box, Button, IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { useState } from 'react';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {
-    buttonText: string,
+    button: React.ReactNode;
     content: React.ReactNode,
 }
 
-const Modal = ({buttonText, content} : Props) => {
+const Modal = ({button, content} : Props) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggleModal = () => {
@@ -17,7 +16,8 @@ const Modal = ({buttonText, content} : Props) => {
 
 	return (
 		<>
-			<Button variant='contained' color='secondary' onClick={toggleModal} endIcon={<AddBoxIcon/>}>{buttonText}</Button>
+			{/* <Button variant='contained' color='secondary' onClick={toggleModal} endIcon={<AddBoxIcon/>}>{buttonText}</Button> */}
+			<div onClick={toggleModal}>{button}</div>
 
 			{isOpen && (
 				<Box

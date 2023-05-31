@@ -1,6 +1,7 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 import { Project, User } from '../../types/types';
 import refreshAccessToken from '../../services/refreshAccessToken';
@@ -118,7 +119,7 @@ const Projects = () => {
 								Begin A New Odyssey
 							</Typography>
 							<Modal
-								buttonText="Create Project"
+								button={<Button variant='contained' color='secondary' endIcon={<AddBoxIcon/>}>Create A New Project</Button>}
 								content={<NewProjectForm/>}
 							/>
 						</Box>
