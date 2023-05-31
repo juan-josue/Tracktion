@@ -22,10 +22,6 @@ const TaskCard = ({ task }: Props) => {
 		window.location.reload();
 	}
 
-	const updateTask = () => {
-		console.log('update task!');
-	};
-
 	const deleteTask = () => {
 		if (!confirm('Are you sure you want to delete this Quest?')) {
 			return;
