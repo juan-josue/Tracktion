@@ -9,6 +9,7 @@ import { Task } from '../../types/types';
 import apiClient from '../../services/apiClient';
 import refreshAccessToken from '../../services/refreshAccessToken';
 import Modal from '../../components/Modal';
+import EditTaskForm from './EditTaskForm';
 
 interface Props {
 	task: Task;
@@ -62,7 +63,7 @@ const TaskCard = ({ task }: Props) => {
 							<EditIcon fontSize="medium" />
 						</IconButton>
 					}
-					content={<h1>Test Content</h1>}
+					content={<EditTaskForm task={task} />}
 				/>
 			</Box>
 			<Stack direction="column" spacing={1} p={2}>

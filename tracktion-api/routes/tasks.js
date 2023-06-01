@@ -37,9 +37,6 @@ router.post('/', auth, async (req, res) => {
 	project.taskCounter = project.taskCounter + 1;
 	project.tasks.push(task._id);
 	project.save();
-	
-	console.log(req.body)
-	console.log(task)
 
 	res.send(task);
 });
@@ -52,12 +49,7 @@ router.put('/:id', async (req, res) => {
 	const task = await Task.findByIdAndUpdate(
 		req.params.id,
 		{
-			name: req.body?.name,
-			xpReward: req.body?.xpReward,
-			summary: req.body?.summary,
-			priority: req.body?.priority,
-			status: req.body?.status,
-			taskTackler: req.body?.taskTackler,
+			...req.body,
 			dateModified: Date.now(),
 		},
 		{ new: true }
