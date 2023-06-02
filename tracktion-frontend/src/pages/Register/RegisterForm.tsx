@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Stack, TextField, Typography } from '@mui/material';
-import apiClient from '../../services/apiClient';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 
-const RegisterForm = () => {
+import apiClient from '../../services/apiClient';
+
+interface Props {
+	pfp: string;
+}
+
+const RegisterForm = ({ pfp }: Props) => {
 	const [first, setFirst] = useState('');
 	const [last, setLast] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const navigate = useNavigate();
 	const [errorMessage, setErrorMessage] = useState('');
+
+	useEffect(() => console.log(pfp), [pfp]);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
