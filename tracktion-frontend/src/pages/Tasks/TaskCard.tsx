@@ -23,6 +23,16 @@ const TaskCard = ({ task }: Props) => {
 		window.location.reload();
 	}
 
+	function addZeroPadding(idNumber: number) {
+		const idLength = 4;
+		if (idNumber.toString().length >= idLength) return idNumber.toString();
+
+		const paddingLength = idLength - idNumber.toString().length;
+		const padding = '0'.repeat(paddingLength);
+
+		return padding + idNumber.toString();
+	}
+
 	const deleteTask = () => {
 		if (!confirm('Are you sure you want to delete this Quest?')) {
 			return;
@@ -53,7 +63,17 @@ const TaskCard = ({ task }: Props) => {
 
 	return (
 		<Box borderRadius="15px" bgcolor="#24202e" border="1px solid white">
-			<Box bgcolor="primary.main" borderRadius="15px" display="inline-block" width="100%" height={0} pb="100%" position="relative">
+			<Box
+				bgcolor="primary.main"
+				borderRadius="15px"
+				width="100%"
+				height={0}
+				pb="100%"
+				position="relative"
+				display="flex"
+				justifyContent="center"
+				alignItems="flex-end"
+			>
 				<IconButton onClick={deleteTask} sx={{ position: 'absolute', top: 5, right: 5 }}>
 					<CloseIcon fontSize="medium" />
 				</IconButton>
@@ -65,6 +85,7 @@ const TaskCard = ({ task }: Props) => {
 					}
 					content={<EditTaskForm task={task} />}
 				/>
+				<img width="40%" src={'/src/assets/pfps/gifs/6.gif'} alt="Profile picture" style={{ position: 'absolute', bottom: 0 }} />
 			</Box>
 			<Stack direction="column" spacing={1} p={2}>
 				{errorMessage && (
@@ -72,7 +93,11 @@ const TaskCard = ({ task }: Props) => {
 						{errorMessage}
 					</Typography>
 				)}
-				<Typography variant="h5">{task.name}</Typography>
+				<Box>
+					<Typography variant="h5">{task.name}</Typography>
+					<Typography variant="body1">{addZeroPadding(task.taskNumber)}</Typography>
+				</Box>
+
 				<Stack direction="row" spacing={2}>
 					<Chip size="small" icon={<WhatshotIcon />} label={task.priority} variant="outlined" />
 					<Chip size="small" label={task.status} variant="outlined" />

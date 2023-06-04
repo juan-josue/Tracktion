@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import apiClient from '../../services/apiClient';
 import refreshAccessToken from '../../services/refreshAccessToken';
-import { Project } from '../../types/types';
+import { Member, Project } from '../../types/types';
 import TaskGrid from './TaskGrid';
 import NewTaskForm from './NewTaskForm';
 import Modal from '../../components/Modal';
@@ -25,6 +25,8 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 const Tasks = () => {
 	const location = useLocation();
 	const projectId = location.state?.projectId;
+	const userId = location.state?.userId;
+	const [member, setMember] = useState<Member>();
 	const [project, setProject] = useState<Project>();
 	const navigate = useNavigate();
 	const [errorMessage, setErrorMessage] = useState('');
@@ -34,9 +36,20 @@ const Tasks = () => {
 		apiClient
 			.get<Project>(`/projects/${projectId}`, {
 				headers: { Authorization: `Bearer ${accessToken}` },
-				params: { populateTasks: 'true' },
+				params: { populateTasks: 'true', populateMembers: 'true' },
 			})
-			.then((res) => setProject(res.data))
+			.then((res) => {
+				console.log('request succesful...')
+				setProject(res.data);
+				console.log('recieved project...', res.data)
+				res.data.members.forEach((member: Member) => {
+					console.log(`Looking for member with id: ${userId}`)
+					if (member.user._id === userId) {
+						console.log('found matching member...', member)
+						setMember(member);
+					}
+				});
+			})
 			.catch(async (err) => {
 				if (err.response && err.response.status === 401) {
 					const newAccessToken = await refreshAccessToken();
@@ -44,9 +57,16 @@ const Tasks = () => {
 						apiClient
 							.get<Project>(`/projects/${projectId}`, {
 								headers: { Authorization: `Bearer ${newAccessToken}` },
-								params: { populateTasks: 'true' },
+								params: { populateTasks: 'true', populateMembers: 'true' },
 							})
-							.then((res) => setProject(res.data))
+							.then((res) => {
+								setProject(res.data);
+								res.data.members.forEach((member: Member) => {
+									if (member.user === userId) {
+										setMember(member);
+									}
+								});
+							})
 							.catch((err) => setErrorMessage(err.response.data));
 					} else {
 						navigate('/login');
@@ -55,12 +75,20 @@ const Tasks = () => {
 					setErrorMessage(err.response.data);
 				}
 			});
-	}, [navigate, projectId]);
+	}, [navigate, projectId, userId]);
 
 	if (!project) {
 		return (
 			<Typography variant="body1" color="error">
 				No project
+			</Typography>
+		);
+	}
+
+	if (!member) {
+		return (
+			<Typography variant="body1" color="error">
+				No member
 			</Typography>
 		);
 	}
@@ -74,10 +102,10 @@ const Tasks = () => {
 							<Stack direction="column" spacing={2}>
 								<Typography variant="h3">{project.name}</Typography>
 								<Stack direction="row" justifyContent="space-between">
-									<Typography variant="h5">Level 7</Typography>
-									<Typography variant="h5">14/20 XP</Typography>
+									<Typography variant="h5">{'Level ' + member.level}</Typography>
+									<Typography variant="h5">{member.xp + '/' + member.xpCap + ' XP'}</Typography>
 								</Stack>
-								<BorderLinearProgress variant="determinate" value={70} />
+								<BorderLinearProgress variant="determinate" value={(member.xp / member.xpCap) * 100} />
 								<Box sx={{ maxWidth: 150 }}>
 									<Modal
 										button={

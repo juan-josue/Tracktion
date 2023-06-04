@@ -2,7 +2,7 @@ export interface Project {
 	_id: string;
 	description: string;
 	joinCode: string;
-	members: string[];
+	members: Member[];
 	name: string;
 	owner: string;
 	taskCounter: number;
@@ -20,7 +20,7 @@ export interface Member {
 	_id: string;
 	level: string;
 	project: string;
-	user: string;
+	user: User;
 	xp: number;
 	xpCap: number;
 }

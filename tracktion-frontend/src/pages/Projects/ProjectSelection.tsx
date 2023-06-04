@@ -7,13 +7,14 @@ import { Project } from '../../types/types';
 
 interface Props {
 	selectedProject: Project | null;
+	userId: string;
 }
 
-const ProjectSelection = ({ selectedProject }: Props) => {
+const ProjectSelection = ({ selectedProject, userId }: Props) => {
 	const navigate = useNavigate();
 
 	const handleClick = () => {
-		navigate('/tasks',  { state: { projectId: selectedProject?._id } });
+		navigate('/tasks',  { state: { projectId: selectedProject?._id, userId: userId } });
 	};
 
 	if (!selectedProject) {

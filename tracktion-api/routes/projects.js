@@ -9,7 +9,7 @@ const router = express.Router();
 
 // GET specified project
 router.get('/:id', auth, async (req, res) => {
-	const { populateTasks } = req.query;
+	const { populateTasks, populateMembers } = req.query;
 
 	let query = Project.findById(req.params.id);
 
@@ -17,7 +17,21 @@ router.get('/:id', auth, async (req, res) => {
 		query = query.populate('tasks');
 	}
 
+	if (populateMembers) {
+		query = query.populate({
+			path: 'members',
+			populate: {
+				path: 'user',
+				model: 'User',
+			},
+		});
+	}
+
 	const project = await query.exec();
+
+	if (populateMembers) {
+		console.log(project);
+	}
 
 	if (!project) return res.status(404).send('The project with the given ID was not found.');
 	res.send(project);
