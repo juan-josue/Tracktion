@@ -31,6 +31,7 @@ router.post('/', async (req, res) => {
 		name: req.body.name,
 		email: req.body.email,
 		password: req.body.password,
+		pfp: req.body.pfp,
 	});
 
 	const salt = await bcrypt.genSalt(10);
@@ -41,6 +42,7 @@ router.post('/', async (req, res) => {
 		_id: user._id,
 		name: user.name,
 		email: user.email,
+		pfp: user.pfp,
 		projects: user.projects,
 	});
 });

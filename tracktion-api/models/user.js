@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
 		minLength: 1,
 		maxLength: 50,
 	},
+	pfp: {
+		type: String,
+		required: true,
+	}
 });
 
 const User = mongoose.model('User', userSchema);
@@ -35,6 +39,7 @@ function validateUser(user) {
 		email: Joi.string().email(),
 		password: Joi.string().min(10),
 		name: Joi.string().min(1).max(50),
+		pfp: Joi.string(),
 	});
 
 	return schema.validate(user);

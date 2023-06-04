@@ -10,14 +10,12 @@ interface Props {
 }
 
 const RegisterForm = ({ pfp }: Props) => {
+	const navigate = useNavigate();
 	const [first, setFirst] = useState('');
 	const [last, setLast] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const navigate = useNavigate();
 	const [errorMessage, setErrorMessage] = useState('');
-
-	useEffect(() => console.log(pfp), [pfp]);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -26,6 +24,7 @@ const RegisterForm = ({ pfp }: Props) => {
 			name: first + ' ' + last,
 			email: email,
 			password: password,
+			pfp: pfp,
 		};
 		apiClient
 			.post('/users', data)
