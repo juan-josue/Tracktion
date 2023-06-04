@@ -16,6 +16,15 @@ export interface User {
 	projects: string[];
 }
 
+export interface Member {
+	_id: string;
+	level: string;
+	project: string;
+	user: string;
+	xp: number;
+	xpCap: number;
+}
+
 export interface Task {
 	_id: string,
 	dateCreated: Date,
