@@ -26,10 +26,12 @@ const Tasks = () => {
 	const location = useLocation();
 	const projectId = location.state?.projectId;
 	const userId = location.state?.userId;
+
 	const [member, setMember] = useState<Member>();
 	const [project, setProject] = useState<Project>();
-	const navigate = useNavigate();
 	const [errorMessage, setErrorMessage] = useState('');
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const accessToken = localStorage.getItem('access_token');
@@ -39,13 +41,9 @@ const Tasks = () => {
 				params: { populateTasks: 'true', populateMembers: 'true' },
 			})
 			.then((res) => {
-				console.log('request succesful...')
 				setProject(res.data);
-				console.log('recieved project...', res.data)
 				res.data.members.forEach((member: Member) => {
-					console.log(`Looking for member with id: ${userId}`)
 					if (member.user._id === userId) {
-						console.log('found matching member...', member)
 						setMember(member);
 					}
 				});
@@ -113,7 +111,7 @@ const Tasks = () => {
 												New Quest
 											</Button>
 										}
-										content={<NewTaskForm projectId={project._id} />}
+										content={<NewTaskForm members={project.members} projectId={project._id} />}
 									/>
 								</Box>
 							</Stack>

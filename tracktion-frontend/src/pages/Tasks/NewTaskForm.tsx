@@ -1,29 +1,32 @@
-import { Autocomplete, Button, Stack, TextField, Typography } from '@mui/material';
+import { Autocomplete, Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import apiClient from '../../services/apiClient';
 import refreshAccessToken from '../../services/refreshAccessToken';
+import { Member } from '../../types/types';
 
 interface Props {
+	members: Member[];
 	projectId: string;
 }
 
-const NewTaskForm = ({ projectId }: Props) => {
+const NewTaskForm = ({ members, projectId }: Props) => {
 	const navigate = useNavigate();
 	const [name, setName] = useState('');
 	const [summary, setSummary] = useState('');
 	const [priority, setPriority] = useState('None');
 	const [status, setStatus] = useState('To-do');
 	const [xpReward, setXpReward] = useState(0);
+	const [taskTackler, setTaskTackler] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 
 	const statusChoices = ['To-do', 'Doing', 'Done'];
 	const priorityChoices = ['None', 'Low', 'Medium', 'High'];
 
-	function refreshPage() {
+	const refreshPage = () => {
 		window.location.reload();
-	}
+	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -80,21 +83,24 @@ const NewTaskForm = ({ projectId }: Props) => {
 					fullWidth
 					required
 				></TextField>
+				<TextField select label="Task Tackler" color="secondary" value={taskTackler} onChange={(e) => setTaskTackler(e.target.value)}>
+					{members.map((member: Member) => (
+						<MenuItem key={member._id} value={member._id}>
+							{`${member.user.name} ${member.user.email}`}
+						</MenuItem>
+					))}
+				</TextField>
 				<Autocomplete
 					options={statusChoices}
 					fullWidth
-                    onChange={(_e, value) => setStatus(value || 'To-do')}
-					renderInput={(params) => (
-						<TextField {...params} color="secondary" label="Status" />
-					)}
+					onChange={(_e, value) => setStatus(value || 'To-do')}
+					renderInput={(params) => <TextField {...params} color="secondary" label="Status" />}
 				/>
 				<Autocomplete
 					options={priorityChoices}
 					fullWidth
-                    onChange={(_e, value) => setPriority(value || 'None')}
-					renderInput={(params) => (
-						<TextField {...params} color="secondary" label="Priority" />
-					)}
+					onChange={(_e, value) => setPriority(value || 'None')}
+					renderInput={(params) => <TextField {...params} color="secondary" label="Priority" />}
 				/>
 				<TextField
 					color="secondary"
