@@ -31,6 +31,7 @@ router.post('/', auth, async (req, res) => {
 		summary: req.body.summary,
 		status: req.body.status,
 		priority: req.body.priority,
+		taskTackler: req.body.taskTackler
 	});
 	task = await task.save();
 

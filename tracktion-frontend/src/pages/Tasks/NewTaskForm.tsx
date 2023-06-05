@@ -21,9 +21,6 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 	const [taskTackler, setTaskTackler] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 
-	const statusChoices = ['To-do', 'Doing', 'Done'];
-	const priorityChoices = ['None', 'Low', 'Medium', 'High'];
-
 	const refreshPage = () => {
 		window.location.reload();
 	};
@@ -40,6 +37,7 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 			summary: summary,
 			status: status,
 			priority: priority,
+			taskTackler: taskTackler
 		};
 
 		apiClient
@@ -90,18 +88,17 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 						</MenuItem>
 					))}
 				</TextField>
-				<Autocomplete
-					options={statusChoices}
-					fullWidth
-					onChange={(_e, value) => setStatus(value || 'To-do')}
-					renderInput={(params) => <TextField {...params} color="secondary" label="Status" />}
-				/>
-				<Autocomplete
-					options={priorityChoices}
-					fullWidth
-					onChange={(_e, value) => setPriority(value || 'None')}
-					renderInput={(params) => <TextField {...params} color="secondary" label="Priority" />}
-				/>
+				<TextField select label="Status" color="secondary" value={status} onChange={(e) => setStatus(e.target.value)}>
+					<MenuItem value={'To-Do'}>To-Do</MenuItem>
+					<MenuItem value={'Doing'}>Doing</MenuItem>
+					<MenuItem value={'Done'}>Done</MenuItem>
+				</TextField>
+				<TextField select label="Priority" color="secondary" value={priority} onChange={(e) => setPriority(e.target.value)}>
+					<MenuItem value={'None'}>None</MenuItem>
+					<MenuItem value={'Low'}>Low</MenuItem>
+					<MenuItem value={'Medium'}>Medium</MenuItem>
+					<MenuItem value={'High'}>High</MenuItem>
+				</TextField>
 				<TextField
 					color="secondary"
 					placeholder="XP"
