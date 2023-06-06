@@ -9,6 +9,7 @@ import { Member, Project } from '../../types/types';
 import TaskGrid from './TaskGrid';
 import NewTaskForm from './NewTaskForm';
 import Modal from '../../components/Modal';
+import Navbar from '../../components/Navbar';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 20,
@@ -95,6 +96,9 @@ const Tasks = () => {
 		<>
 			<Box minHeight="100vh" bgcolor="bg.main" p={2} boxSizing="border-box">
 				<Box bgcolor="bg.light" borderRadius="15px">
+					<Navbar />
+				</Box>
+				<Box bgcolor="bg.light" borderRadius="15px" mt={2}>
 					<Grid container>
 						<Grid item xs={12} md={6} p={2}>
 							<Stack direction="column" spacing={2}>
