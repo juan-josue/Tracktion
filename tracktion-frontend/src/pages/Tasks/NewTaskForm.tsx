@@ -89,7 +89,7 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 					))}
 				</TextField>
 				<TextField select label="Status" color="secondary" value={status} onChange={(e) => setStatus(e.target.value)}>
-					<MenuItem value={'To-Do'}>To-Do</MenuItem>
+					<MenuItem value={'To-do'}>To-Do</MenuItem>
 					<MenuItem value={'Doing'}>Doing</MenuItem>
 					<MenuItem value={'Done'}>Done</MenuItem>
 				</TextField>

@@ -85,7 +85,7 @@ const TaskCard = ({ task }: Props) => {
 					}
 					content={<EditTaskForm task={task} />}
 				/>
-				<img width="40%" src={'/src/assets/pfps/gifs/6.gif'} alt="Profile picture" style={{ position: 'absolute', bottom: 0 }} />
+				<img width="40%" src={task.taskTackler.user.pfp} alt="Profile picture" style={{ position: 'absolute', bottom: 0 }} />
 			</Box>
 			<Stack direction="column" spacing={1} p={2}>
 				{errorMessage && (

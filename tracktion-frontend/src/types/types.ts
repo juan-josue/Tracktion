@@ -14,6 +14,7 @@ export interface User {
 	name: string;
 	email: string;
 	projects: string[];
+	pfp: string;
 }
 
 export interface Member {
@@ -35,6 +36,6 @@ export interface Task {
 	status: string,
 	summary: string,
 	taskNumber: number,
-	taskTackler: string,
+	taskTackler: Member,
 	xpReward: number,
 }
