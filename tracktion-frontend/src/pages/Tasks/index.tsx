@@ -123,7 +123,7 @@ const Tasks = () => {
 					<Typography variant="h3" mb={2}>
 						Quests
 					</Typography>
-					<TaskGrid tasks={project.tasks} />
+					<TaskGrid members={project.members} tasks={project.tasks} />
 				</Box>
 			</Box>
 		</>

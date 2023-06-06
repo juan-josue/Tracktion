@@ -5,17 +5,18 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import { Task } from '../../types/types';
+import { Member, Task } from '../../types/types';
 import apiClient from '../../services/apiClient';
 import refreshAccessToken from '../../services/refreshAccessToken';
 import Modal from '../../components/Modal';
 import EditTaskForm from './EditTaskForm';
 
 interface Props {
+	members: Member[];
 	task: Task;
 }
 
-const TaskCard = ({ task }: Props) => {
+const TaskCard = ({ members, task }: Props) => {
 	const navigate = useNavigate();
 	const [errorMessage, setErrorMessage] = useState('');
 
@@ -83,7 +84,7 @@ const TaskCard = ({ task }: Props) => {
 							<EditIcon fontSize="medium" />
 						</IconButton>
 					}
-					content={<EditTaskForm task={task} />}
+					content={<EditTaskForm members={members} task={task} />}
 				/>
 				<img width="40%" src={task.taskTackler.user.pfp} alt="Profile picture" style={{ position: 'absolute', bottom: 0 }} />
 			</Box>

@@ -1,25 +1,24 @@
-import { Autocomplete, Button, Stack, TextField, Typography } from '@mui/material';
+import { Button, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
 import refreshAccessToken from '../../services/refreshAccessToken';
-import { Task } from '../../types/types';
+import { Member, Task } from '../../types/types';
 
 interface Props {
-    task: Task;
+	members: Member[];
+	task: Task;
 }
 
-const EditTaskForm = ({ task }: Props) => {
+const EditTaskForm = ({ members, task }: Props) => {
 	const navigate = useNavigate();
 	const [name, setName] = useState(task.name);
 	const [summary, setSummary] = useState(task.summary);
 	const [priority, setPriority] = useState(task.priority);
 	const [status, setStatus] = useState(task.status);
 	const [xpReward, setXpReward] = useState(task.xpReward);
+	const [taskTackler, setTaskTackler] = useState(task.taskTackler._id);
 	const [errorMessage, setErrorMessage] = useState('');
-
-	const statusChoices = ['To-do', 'Doing', 'Done'];
-	const priorityChoices = ['None', 'Low', 'Medium', 'High'];
 
 	function refreshPage() {
 		window.location.reload();
@@ -36,6 +35,7 @@ const EditTaskForm = ({ task }: Props) => {
 			summary: summary,
 			status: status,
 			priority: priority,
+			taskTackler: taskTackler,
 		};
 
 		apiClient
@@ -66,33 +66,44 @@ const EditTaskForm = ({ task }: Props) => {
 				}
 			});
 	};
-
+	
 	return (
 		<form onSubmit={handleSubmit}>
 			<Stack direction="column" spacing={2}>
 				<TextField
 					color="secondary"
-                    defaultValue={task.name}
+					defaultValue={task.name}
 					onChange={(e) => setName(e.target.value)}
 					label="Task Name"
 					type="text"
 					fullWidth
 					required
 				></TextField>
-				<Autocomplete
-					options={statusChoices}
-                    defaultValue={task.status}
-					fullWidth
-					onChange={(_e, value) => setStatus(value || 'To-do')}
-					renderInput={(params) => <TextField {...params} color="secondary" label="Status" />}
-				/>
-				<Autocomplete
-					options={priorityChoices}
-                    defaultValue={task.priority}
-					fullWidth
-					onChange={(_e, value) => setPriority(value || 'None')}
-					renderInput={(params) => <TextField {...params} color="secondary" label="Priority" />}
-				/>
+				<TextField
+					select
+					label="Task Tackler"
+					color="secondary"
+					value={taskTackler}
+					onChange={(e) => setTaskTackler(e.target.value)}
+					required
+				>
+					{members.map((member: Member) => (
+						<MenuItem key={member._id} value={member._id}>
+							{`${member.user.name} ${member.user.email}`}
+						</MenuItem>
+					))}
+				</TextField>
+				<TextField select label="Status" color="secondary" value={status} onChange={(e) => setStatus(e.target.value)}>
+					<MenuItem value={'To-do'}>To-Do</MenuItem>
+					<MenuItem value={'Doing'}>Doing</MenuItem>
+					<MenuItem value={'Done'}>Done</MenuItem>
+				</TextField>
+				<TextField select label="Priority" color="secondary" value={priority} onChange={(e) => setPriority(e.target.value)}>
+					<MenuItem value={'None'}>None</MenuItem>
+					<MenuItem value={'Low'}>Low</MenuItem>
+					<MenuItem value={'Medium'}>Medium</MenuItem>
+					<MenuItem value={'High'}>High</MenuItem>
+				</TextField>
 				<TextField
 					color="secondary"
 					defaultValue={task.xpReward}

@@ -1,4 +1,4 @@
-import { Autocomplete, Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
+import { Button, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -81,7 +81,7 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 					fullWidth
 					required
 				></TextField>
-				<TextField select label="Task Tackler" color="secondary" value={taskTackler} onChange={(e) => setTaskTackler(e.target.value)}>
+				<TextField select label="Task Tackler" color="secondary" value={taskTackler} onChange={(e) => setTaskTackler(e.target.value)} required>
 					{members.map((member: Member) => (
 						<MenuItem key={member._id} value={member._id}>
 							{`${member.user.name} ${member.user.email}`}
