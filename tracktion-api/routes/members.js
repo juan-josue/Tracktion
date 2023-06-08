@@ -47,4 +47,37 @@ router.delete('/:id', async (req, res) => {
 	res.send(member);
 });
 
+// PUT user level
+router.post('/:id/addxp', async (req, res) => {
+	const id = req.params.id;
+	let { xpReward } = req.body;
+
+	if (!xpReward || xpReward < 0) return res.status(400).send('Invalid XP reward.');
+	
+	const member = await Member.findById(id);
+	if (!member) return res.status(404).send('The member with the given ID was not found.');
+
+	let levelsGained = 0;
+
+	// While there is still xp to be rewarded
+	while (xpReward > 0) {
+		// Level up
+		if (member.xp + xpReward >= member.xpCap) {
+			xpReward = xpReward - (member.xpCap - member.xp)
+			levelsGained++;
+			member.xp = 0;
+			member.xpCap += 5;
+		// No level up
+		} else {
+			member.xp = member.xp + xpReward;
+			xpReward = 0;
+		}
+	}
+	member.level += levelsGained;
+
+	await member.save();	
+
+	res.send(member);
+});
+
 module.exports = router;
