@@ -3,6 +3,7 @@ const express = require('express');
 const { Project } = require('../models/project');
 const { Member, validateMember } = require('../models/member');
 const { User } = require('../models/user');
+const auth = require('../middleware/auth');
 const router = express.Router();
 
 // POST a new project member
@@ -48,7 +49,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // PUT user level
-router.post('/:id/addxp', async (req, res) => {
+router.post('/:id/addxp', auth, async (req, res) => { 
 	const id = req.params.id;
 	let { xpReward } = req.body;
 
@@ -74,7 +75,7 @@ router.post('/:id/addxp', async (req, res) => {
 		}
 	}
 	member.level += levelsGained;
-
+	
 	await member.save();	
 
 	res.send(member);
