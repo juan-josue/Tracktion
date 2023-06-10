@@ -20,7 +20,7 @@ const JoinProjectForm = ({ userId }: Props) => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// Get access token from local storage
+
 		const accessToken = localStorage.getItem('access_token');
 
 		const data = {
@@ -36,11 +36,9 @@ const JoinProjectForm = ({ userId }: Props) => {
 			})
 			.then(() => refreshPage())
 			.catch(async (err) => {
-				// If the status is 401 (Unauthorized), try and refresh the access token
 				if (err.response.status === 401) {
 					const newAccessToken = await refreshAccessToken();
 					if (newAccessToken) {
-						// If refreshing succeeded, update local storage and retry posting member
 						localStorage.setItem('access_token', newAccessToken);
 						apiClient
 							.post('/members', data, {

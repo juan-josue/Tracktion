@@ -16,7 +16,16 @@ const ProjectCard = ({ color, project, onClick }: Props) => {
 	};
 
 	return (
-		<Box borderRadius="15px" bgcolor={color} height={{ xs: 150, md: 300 }} width={{ xs: 150, md: 300 }} maxWidth="100%" flexShrink={0} p={2} onClick={handleClick}>
+		<Box
+			borderRadius="15px"
+			bgcolor={color}
+			height={{ xs: 150, md: 300 }}
+			width={{ xs: 150, md: 300 }}
+			maxWidth="100%"
+			flexShrink={0}
+			p={2}
+			onClick={handleClick}
+		>
 			<Typography sx={{ typography: { xs: 'h5', md: 'h3' } }} color="typography.main">
 				{project.name}
 			</Typography>

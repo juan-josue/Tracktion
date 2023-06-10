@@ -17,7 +17,7 @@ const NewProjectForm = () => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// Get access token from local storage
+
 		const accessToken = localStorage.getItem('access_token');
 
 		const data = {
@@ -27,28 +27,21 @@ const NewProjectForm = () => {
 
 		apiClient
 			.post('/projects', data, {
-				headers: {
-					Authorization: `Bearer ${accessToken}`,
-				},
+				headers: { Authorization: `Bearer ${accessToken}` },
 			})
 			.then(() => refreshPage())
 			.catch(async (err) => {
-				// If the status is 401 (Unauthorized), try and refresh the access token
 				if (err.response.status === 401) {
 					const newAccessToken = await refreshAccessToken();
 					if (newAccessToken) {
-						// If refreshing succeeded, update local storage and retry posting project
 						localStorage.setItem('access_token', newAccessToken);
 						apiClient
 							.post('/projects', data, {
-								headers: {
-									Authorization: `Bearer ${newAccessToken}`,
-								},
+								headers: { Authorization: `Bearer ${newAccessToken}` },
 							})
 							.then(() => refreshPage())
 							.catch((err) => setErrorMessage(err.response.data));
 					} else {
-						// If refreshing the access token failed, navigate back to login
 						navigate('/login');
 					}
 				} else {
@@ -80,7 +73,7 @@ const NewProjectForm = () => {
 					minRows={5}
 					variant="filled"
 				></TextField>
-				<Button variant="contained" type="submit" color='secondary'>
+				<Button variant="contained" type="submit" color="secondary">
 					Create Project
 				</Button>
 				{errorMessage && (
