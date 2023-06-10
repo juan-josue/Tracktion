@@ -16,7 +16,6 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 	const [name, setName] = useState('');
 	const [summary, setSummary] = useState('');
 	const [priority, setPriority] = useState('None');
-	const [status, setStatus] = useState('To-do');
 	const [xpReward, setXpReward] = useState(0);
 	const [taskTackler, setTaskTackler] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
@@ -35,7 +34,7 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 			xpReward: xpReward,
 			project: projectId,
 			summary: summary,
-			status: status,
+			status: 'To-do',
 			priority: priority,
 			taskTackler: taskTackler
 		};
@@ -87,11 +86,6 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 							{`${member.user.name} ${member.user.email}`}
 						</MenuItem>
 					))}
-				</TextField>
-				<TextField select label="Status" color="secondary" value={status} onChange={(e) => setStatus(e.target.value)}>
-					<MenuItem value={'To-do'}>To-Do</MenuItem>
-					<MenuItem value={'Doing'}>Doing</MenuItem>
-					<MenuItem value={'Done'}>Done</MenuItem>
 				</TextField>
 				<TextField select label="Priority" color="secondary" value={priority} onChange={(e) => setPriority(e.target.value)}>
 					<MenuItem value={'None'}>None</MenuItem>
