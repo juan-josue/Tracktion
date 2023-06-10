@@ -68,7 +68,6 @@ router.delete('/:id', auth, async (req, res) => {
 	const project = await Project.findById(task.project);
 	if (!task) return res.status(404).send('The project with the given ID was not found.');
 
-	project.taskCounter = project.taskCounter - 1;
 	project.tasks.pull(task._id);
 	await project.save();
 	res.send(task);

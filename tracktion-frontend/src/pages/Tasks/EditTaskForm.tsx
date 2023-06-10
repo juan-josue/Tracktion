@@ -96,7 +96,6 @@ const EditTaskForm = ({ members, task }: Props) => {
 				<TextField select label="Status" color="secondary" value={status} onChange={(e) => setStatus(e.target.value)}>
 					<MenuItem value={'To-do'}>To-Do</MenuItem>
 					<MenuItem value={'Doing'}>Doing</MenuItem>
-					<MenuItem value={'Done'}>Done</MenuItem>
 				</TextField>
 				<TextField select label="Priority" color="secondary" value={priority} onChange={(e) => setPriority(e.target.value)}>
 					<MenuItem value={'None'}>None</MenuItem>
