@@ -27,8 +27,8 @@ const LeaderBoardItem = ({ member, isLeader }: Props) => {
 				<img src={member.user.pfp} height={pfpSize}></img>
 			</Box>
 			<Box display="flex" flexDirection={'column'} alignItems="center">
-				<Typography variant="body1" fontWeight="bold" color={textColor}>
-					{member.user.name}
+				<Typography variant="body1" fontWeight="bold" color={textColor} noWrap>
+					{member.user.name.split(' ')[0]}
 				</Typography>
 				<Typography variant="body1">{`Level ${member.level}`}</Typography>
 			</Box>

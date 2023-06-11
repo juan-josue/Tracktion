@@ -11,6 +11,7 @@ import NewTaskForm from './NewTaskForm';
 import Modal from '../../components/Modal';
 import Navbar from '../../components/Navbar';
 import LeaderBoard from './LeaderBoard';
+import FilterBtns from './FilterBtns';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 20,
@@ -77,7 +78,7 @@ const Tasks = () => {
 			});
 	}, [navigate, projectId, userId]);
 
-	if (!project) {
+	if (!project || !member) {
 		return (
 			<Typography variant="body1" color="error">
 				No project
@@ -85,16 +86,13 @@ const Tasks = () => {
 		);
 	}
 
-	if (!member) {
-		return (
-			<Typography variant="body1" color="error">
-				No member
-			</Typography>
-		);
-	}
-
 	return (
 		<>
+			{errorMessage && (
+				<Typography variant="body1" color="error">
+					{errorMessage}
+				</Typography>
+			)}
 			<Box minHeight="100vh" bgcolor="bg.main" p={2} boxSizing="border-box">
 				<Box bgcolor="bg.light" borderRadius="15px">
 					<Navbar />
@@ -109,16 +107,19 @@ const Tasks = () => {
 									<Typography variant="h5">{member.xp + '/' + member.xpCap + ' XP'}</Typography>
 								</Stack>
 								<BorderLinearProgress variant="determinate" value={(member.xp / member.xpCap) * 100} />
-								<Box sx={{ maxWidth: 150 }}>
-									<Modal
-										button={
-											<Button variant="contained" color="secondary" endIcon={<AddBoxIcon />}>
-												New Quest
-											</Button>
-										}
-										content={<NewTaskForm members={project.members} projectId={project._id} />}
-									/>
-								</Box>
+								<Stack direction="row" spacing={2} justifyContent="space-between">
+									<Box sx={{ maxWidth: 150 }}>
+										<Modal
+											button={
+												<Button variant="contained" color="secondary" endIcon={<AddBoxIcon />}>
+													New Quest
+												</Button>
+											}
+											content={<NewTaskForm members={project.members} projectId={project._id} />}
+										/>
+									</Box>
+									<FilterBtns />
+								</Stack>
 							</Stack>
 						</Grid>
 						<Grid item xs={12} md={6}>
