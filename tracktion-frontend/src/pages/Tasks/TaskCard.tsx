@@ -65,7 +65,7 @@ const TaskCard = ({ members, task }: Props) => {
 	};
 
 	return (
-		<Box borderRadius="15px" bgcolor="#24202e" border="1px solid white">
+		<Box borderRadius="15px" bgcolor="#24202e" border={task.status === 'Done' ? '3px solid #826b9e' : '3px solid white'}>
 			<Box
 				bgcolor="primary.main"
 				borderRadius="15px"
