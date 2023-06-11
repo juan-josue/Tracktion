@@ -117,12 +117,6 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 					Create Task
 				</Button>
 			</Stack>
-
-			{errorMessage && (
-				<Typography variant="body1" color="error">
-					{errorMessage}
-				</Typography>
-			)}
 		</form>
 	);
 };

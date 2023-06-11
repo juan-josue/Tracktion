@@ -10,6 +10,7 @@ import TaskGrid from './TaskGrid';
 import NewTaskForm from './NewTaskForm';
 import Modal from '../../components/Modal';
 import Navbar from '../../components/Navbar';
+import LeaderBoard from './LeaderBoard';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 20,
@@ -120,7 +121,9 @@ const Tasks = () => {
 								</Box>
 							</Stack>
 						</Grid>
-						<Grid item xs={12} md={6}></Grid>
+						<Grid item xs={12} md={6}>
+							<LeaderBoard members={project.members} />
+						</Grid>
 					</Grid>
 				</Box>
 				<Box bgcolor="bg.light" borderRadius="15px" mt={2} p={2}>

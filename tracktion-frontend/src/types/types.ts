@@ -19,7 +19,7 @@ export interface User {
 
 export interface Member {
 	_id: string;
-	level: string;
+	level: number;
 	project: string;
 	user: User;
 	xp: number;
