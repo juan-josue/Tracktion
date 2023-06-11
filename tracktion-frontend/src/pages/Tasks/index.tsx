@@ -11,7 +11,7 @@ import NewTaskForm from './NewTaskForm';
 import Modal from '../../components/Modal';
 import Navbar from '../../components/Navbar';
 import LeaderBoard from './LeaderBoard';
-import FilterBtns from './FilterBtns';
+import FilterBtns from './FilterMenus';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 	height: 20,
@@ -107,19 +107,23 @@ const Tasks = () => {
 									<Typography variant="h5">{member.xp + '/' + member.xpCap + ' XP'}</Typography>
 								</Stack>
 								<BorderLinearProgress variant="determinate" value={(member.xp / member.xpCap) * 100} />
-								<Stack direction="row" spacing={2} justifyContent="space-between">
-									<Box sx={{ maxWidth: 150 }}>
-										<Modal
-											button={
-												<Button variant="contained" color="secondary" endIcon={<AddBoxIcon />}>
-													New Quest
-												</Button>
-											}
-											content={<NewTaskForm members={project.members} projectId={project._id} />}
-										/>
-									</Box>
-									<FilterBtns />
-								</Stack>
+								<Grid container justifyContent="space-between">
+									<Grid item xs={12} lg={6} mb={2}>
+										<Box sx={{ maxWidth: 150 }}>
+											<Modal
+												button={
+													<Button variant="contained" color="secondary" endIcon={<AddBoxIcon />}>
+														New Quest
+													</Button>
+												}
+												content={<NewTaskForm members={project.members} projectId={project._id} />}
+											/>
+										</Box>
+									</Grid>
+									<Grid item xs={12} lg={6} display="flex" justifyContent={{ xs: 'flex-start', lg: 'flex-end' }}>
+										<FilterBtns />
+									</Grid>
+								</Grid>
 							</Stack>
 						</Grid>
 						<Grid item xs={12} md={6}>
