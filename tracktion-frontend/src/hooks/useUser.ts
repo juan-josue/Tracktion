@@ -5,7 +5,7 @@ import apiClient from "../services/apiClient";
 import refreshAccessToken from "../services/refreshAccessToken";
 import { User } from "../types/types";
 
-const useProjects = () => {
+const useUser = () => {
     const [user, setUser] = useState<User | null>(null);
     const navigate = useNavigate();
 
@@ -36,4 +36,4 @@ const useProjects = () => {
     return { user };
 };
 
-export default useProjects;
+export default useUser;

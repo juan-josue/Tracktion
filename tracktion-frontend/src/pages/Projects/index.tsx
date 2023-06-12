@@ -1,11 +1,9 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
-import { Project, User } from '../../types/types';
-import refreshAccessToken from '../../services/refreshAccessToken';
-import apiClient from '../../services/apiClient';
+import { Project } from '../../types/types';
 
 import UserBanner from './UserBanner';
 import ProjectList from './ProjectList';

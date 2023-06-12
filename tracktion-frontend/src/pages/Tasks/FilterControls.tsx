@@ -1,7 +1,7 @@
 import { Stack, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useState } from 'react';
 
-const FilterMenus = () => {
+const FilterControls = () => {
 	const [idOrder, setIdOrder] = useState('Ascending');
 	const [priority, setPriority] = useState('');
 	const [status, setStatus] = useState('');
@@ -37,4 +37,4 @@ const FilterMenus = () => {
 	);
 };
 
-export default FilterMenus;
+export default FilterControls;
