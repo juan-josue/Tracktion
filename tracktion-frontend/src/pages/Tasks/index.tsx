@@ -106,7 +106,7 @@ const Tasks = () => {
 					<Typography variant="h3" mb={2}>
 						Quests
 					</Typography>
-					<TaskGrid members={project.members} tasks={project.tasks} />
+					<TaskGrid filters={{idOrder, priority, status}} members={project.members} tasks={project.tasks} />
 				</Box>
 			</Box>
 		</>
