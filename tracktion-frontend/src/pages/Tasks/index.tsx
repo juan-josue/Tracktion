@@ -63,7 +63,7 @@ const Tasks = () => {
 				</Box>
 				<Box bgcolor="bg.light" borderRadius="15px" mt={2}>
 					<Grid container>
-						<Grid item xs={12} md={6} p={2}>
+						<Grid item xs={12} lg={6} p={2}>
 							<Stack direction="column" spacing={2}>
 								<Typography variant="h3">{project.name}</Typography>
 								<Stack direction="row" justifyContent="space-between">
@@ -72,7 +72,7 @@ const Tasks = () => {
 								</Stack>
 								<BorderLinearProgress variant="determinate" value={(member.xp / member.xpCap) * 100} />
 								<Grid container justifyContent="space-between">
-									<Grid item xs={12} lg={6} mb={2}>
+									<Grid item xs={6} md={6} mb={2}>
 										<Box sx={{ maxWidth: 150 }}>
 											<Modal
 												button={
@@ -84,7 +84,7 @@ const Tasks = () => {
 											/>
 										</Box>
 									</Grid>
-									<Grid item xs={12} lg={6} display="flex" justifyContent={{ xs: 'flex-start', lg: 'flex-end' }}>
+									<Grid item xs={6} md={6} display="flex" justifyContent='flex-end'>
 										<FilterControls
 											idOrder={idOrder}
 											priority={priority}
@@ -97,7 +97,7 @@ const Tasks = () => {
 								</Grid>
 							</Stack>
 						</Grid>
-						<Grid item xs={12} md={6}>
+						<Grid item xs={12} lg={6}>
 							<LeaderBoard members={project.members} />
 						</Grid>
 					</Grid>

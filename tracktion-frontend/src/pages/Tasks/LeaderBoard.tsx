@@ -17,7 +17,7 @@ const LeaderBoard = ({ members }: Props) => {
 		<Box p={2} height="100%" display='flex' justifyContent={'center'}>
 			<Stack spacing={2}>
 				<Typography variant="h5">Top Questers</Typography>
-				<Stack direction="row" spacing={4} alignItems="center">
+				<Stack direction="row" spacing={{xs: 2, sm: 4}} alignItems="center">
 					{members[1] && <LeaderBoardItem isLeader={false} member={members[1]} />}
 					{members[0] && <LeaderBoardItem isLeader={true} member={members[0]} />}
 					{members[2] && <LeaderBoardItem isLeader={false} member={members[2]} />}

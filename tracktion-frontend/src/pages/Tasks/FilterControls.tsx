@@ -11,7 +11,7 @@ interface Props {
 
 const FilterControls = ({ idOrder, priority, status, setIdOrder, setPriority, setStatus }: Props) => {
 	return (
-		<Stack direction={'row'} spacing={2}>
+		<Stack direction={{xs: 'column', sm: 'row'}} spacing={2}>
 			<FormControl sx={{ minWidth: 140 }} size="small">
 				<InputLabel>ID</InputLabel>
 				<Select autoWidth value={idOrder} label="Age" onChange={(e) => setIdOrder(e.target.value)}>
