@@ -1,5 +1,6 @@
 import { Box, Button, Grid, LinearProgress, Stack, Typography, linearProgressClasses, styled } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import { useState } from 'react';
 
 import TaskGrid from './TaskGrid';
 import NewTaskForm from './NewTaskForm';
@@ -22,7 +23,24 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const Tasks = () => {
+	const [idOrder, setIdOrder] = useState('Ascending');
+	const [priority, setPriority] = useState('');
+	const [status, setStatus] = useState('');
 	const { member, project, errorMessage } = useProject();
+
+	const handleIdOrderChange = (newIdOrder: string) => {
+		setIdOrder(newIdOrder);
+	};
+
+	const handlePriorityChange = (newPriority: string) => {
+		setPriority(newPriority);
+	};
+
+	const handleStatusChange = (newStatus: string) => {
+		setStatus(newStatus);
+	};
+
+	console.log(idOrder, priority, status);
 
 	if (!project || !member) {
 		return (
@@ -67,7 +85,14 @@ const Tasks = () => {
 										</Box>
 									</Grid>
 									<Grid item xs={12} lg={6} display="flex" justifyContent={{ xs: 'flex-start', lg: 'flex-end' }}>
-										<FilterControls />
+										<FilterControls
+											idOrder={idOrder}
+											priority={priority}
+											status={status}
+											setIdOrder={handleIdOrderChange}
+											setPriority={handlePriorityChange}
+											setStatus={handleStatusChange}
+										/>
 									</Grid>
 								</Grid>
 							</Stack>

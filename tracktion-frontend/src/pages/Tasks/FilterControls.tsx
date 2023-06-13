@@ -1,11 +1,15 @@
 import { Stack, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { useState } from 'react';
 
-const FilterControls = () => {
-	const [idOrder, setIdOrder] = useState('Ascending');
-	const [priority, setPriority] = useState('');
-	const [status, setStatus] = useState('');
+interface Props {
+	idOrder: string;
+	setIdOrder: (newIdOrder: string) => void;
+	priority: string;
+	setPriority: (newPriority: string) => void;
+	status: string;
+	setStatus: (newStatus: string) => void;
+}
 
+const FilterControls = ({ idOrder, priority, status, setIdOrder, setPriority, setStatus }: Props) => {
 	return (
 		<Stack direction={'row'} spacing={2}>
 			<FormControl sx={{ minWidth: 140 }} size="small">
