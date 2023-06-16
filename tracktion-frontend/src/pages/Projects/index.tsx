@@ -12,6 +12,7 @@ import NewProjectForm from './NewProjectForm';
 import JoinProjectForm from './JoinProjectForm';
 import Modal from '../../components/Modal';
 import useUser from '../../hooks/useUser';
+import './animatedBackground.css';
 
 const Projects = () => {
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -34,8 +35,23 @@ const Projects = () => {
 			<Grid container item xs={12} md={8} lg={9} order={{ xs: 2, md: 1 }}>
 				{/* user banner */}
 				<Grid item xs={12} md={6} height={{ xs: 'auto', md: '50vh' }}>
-					<Box bgcolor="primary.light" p={2} borderRadius="15px" height={{ xs: 'auto', md: '100%' }} mr={{ xs: 0, md: 2 }}>
+					<Box
+						bgcolor="primary.light"
+						className="background"
+						p={2}
+						borderRadius="15px"
+						height={{ xs: 'auto', md: '100%' }}
+						mr={{ xs: 0, md: 2 }}
+					>
 						<UserBanner user={user} />
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
 					</Box>
 				</Grid>
 				{/* join and create controls */}
