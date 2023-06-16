@@ -19,8 +19,8 @@ const ProjectCard = ({ color, project, onClick }: Props) => {
 		<Box
 			borderRadius="15px"
 			bgcolor={color}
-			height={{ xs: 150, md: 300 }}
-			width={{ xs: 150, md: 300 }}
+			height='300px'
+			width='300px'
 			maxWidth="100%"
 			flexShrink={0}
 			p={2}

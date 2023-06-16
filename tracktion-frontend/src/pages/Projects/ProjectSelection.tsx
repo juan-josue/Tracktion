@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 import ProjectCard from './ProjectCard';
 import { Project } from '../../types/types';
+import Modal from '../../components/Modal';
+import EditProjectForm from './EditProjectForm';
 
 interface Props {
 	selectedProject: Project | null;
@@ -44,12 +46,22 @@ const ProjectSelection = ({ selectedProject, userId }: Props) => {
 				</Button>
 				{userId === selectedProject.owner && (
 					<Stack direction="row" mb={2} spacing={2} justifyContent="center">
-						<Button variant="contained" color="secondary" onClick={handleClick} endIcon={<ModeEditIcon />}>
-							Edit
-						</Button>
-						<Button variant="contained" color="secondary" onClick={handleClick} endIcon={<ClearIcon />}>
-							Delete
-						</Button>
+						<Modal
+							button={
+								<Button variant="contained" color="secondary" endIcon={<ModeEditIcon />}>
+									Edit
+								</Button>
+							}
+							content={<EditProjectForm />}
+						/>
+						<Modal
+							button={
+								<Button variant="contained" color="secondary" endIcon={<ClearIcon />}>
+									Delete
+								</Button>
+							}
+							content={<Typography variant='h4'>Delete this project forever? Forever is a long time.</Typography>}
+						/>
 					</Stack>
 				)}
 			</Stack>

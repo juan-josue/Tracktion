@@ -26,9 +26,7 @@ const NewProjectForm = () => {
 		};
 
 		apiClient
-			.post('/projects', data, {
-				headers: { Authorization: `Bearer ${accessToken}` },
-			})
+			.post('/projects', data, { headers: { Authorization: `Bearer ${accessToken}` } })
 			.then(() => refreshPage())
 			.catch(async (err) => {
 				if (err.response.status === 401) {
@@ -36,9 +34,7 @@ const NewProjectForm = () => {
 					if (newAccessToken) {
 						localStorage.setItem('access_token', newAccessToken);
 						apiClient
-							.post('/projects', data, {
-								headers: { Authorization: `Bearer ${newAccessToken}` },
-							})
+							.post('/projects', data, { headers: { Authorization: `Bearer ${newAccessToken}` } })
 							.then(() => refreshPage())
 							.catch((err) => setErrorMessage(err.response.data));
 					} else {
