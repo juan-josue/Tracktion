@@ -29,8 +29,6 @@ const ProjectSelection = ({ selectedProject, userId }: Props) => {
 		);
 	}
 
-	console.log(selectedProject);
-
 	return (
 		<>
 			<Typography variant="h5" color="typography.main" mb={2}>
@@ -52,7 +50,7 @@ const ProjectSelection = ({ selectedProject, userId }: Props) => {
 									Edit
 								</Button>
 							}
-							content={<EditProjectForm />}
+							content={<EditProjectForm project={selectedProject} />}
 						/>
 						<Modal
 							button={
@@ -60,7 +58,7 @@ const ProjectSelection = ({ selectedProject, userId }: Props) => {
 									Delete
 								</Button>
 							}
-							content={<Typography variant='h4'>Delete this project forever? Forever is a long time.</Typography>}
+							content={<Typography variant='h4'>Remove this adventure forever? Forever is a long time.</Typography>}
 						/>
 					</Stack>
 				)}

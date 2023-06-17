@@ -24,9 +24,10 @@ const ProjectCard = ({ color, project, onClick }: Props) => {
 			maxWidth="100%"
 			flexShrink={0}
 			p={2}
+			overflow='hidden'
 			onClick={handleClick}
 		>
-			<Typography sx={{ typography: { xs: 'h5', md: 'h3' } }} color="typography.main">
+			<Typography sx={{ typography: { xs: 'h5', md: 'h4' } }} color="typography.main">
 				{project.name}
 			</Typography>
 			<Typography sx={{ typography: { xs: 'body1', md: 'h5' } }} color="typography.main">
