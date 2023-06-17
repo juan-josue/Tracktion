@@ -72,7 +72,7 @@ const Projects = () => {
 							</Typography>
 							<Modal
 								button={
-									<Button variant="contained" color="secondary" endIcon={<AddBoxIcon />}>
+									<Button variant="contained" color="secondary" fullWidth endIcon={<AddBoxIcon />}>
 										Create A New Project
 									</Button>
 								}

@@ -2,12 +2,14 @@ import { Box, Button, Stack, Typography } from '@mui/material';
 import PlayIcon from '@mui/icons-material/PlayCircle';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import ClearIcon from '@mui/icons-material/Clear';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useNavigate } from 'react-router-dom';
 
 import ProjectCard from './ProjectCard';
 import { Project } from '../../types/types';
 import Modal from '../../components/Modal';
 import EditProjectForm from './EditProjectForm';
+import DeleteProjectForm from './DeleteProjectForm';
 
 interface Props {
 	selectedProject: Project | null;
@@ -58,9 +60,19 @@ const ProjectSelection = ({ selectedProject, userId }: Props) => {
 									Delete
 								</Button>
 							}
-							content={<Typography variant='h4'>Remove this adventure forever? Forever is a long time.</Typography>}
+							content={<DeleteProjectForm project={selectedProject}></DeleteProjectForm>}
 						/>
 					</Stack>
+				)}
+				{userId !== selectedProject.owner && (
+					<Modal
+						button={
+							<Button variant="contained" color="secondary" endIcon={<ExitToAppIcon />}>
+								Leave Adventure
+							</Button>
+						}
+						content={<DeleteProjectForm project={selectedProject}></DeleteProjectForm>}
+					/>
 				)}
 			</Stack>
 
