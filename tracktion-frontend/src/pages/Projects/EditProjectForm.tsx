@@ -37,9 +37,9 @@ const EditProjectForm = ({ project }: Props) => {
 				if (err.response.status === 401) {
 					const newAccessToken = await refreshAccessToken();
 					if (newAccessToken) {
-						localStorage.setItem(`/projects/${project._id}`, newAccessToken);
+						localStorage.setItem('access_token', newAccessToken);
 						apiClient
-							.put('/projects', data, { headers: { Authorization: `Bearer ${newAccessToken}` } })
+							.put(`/projects/${project._id}`, data, { headers: { Authorization: `Bearer ${newAccessToken}` } })
 							.then(() => refreshPage())
 							.catch((err) => setErrorMessage(err.response.data));
 					} else {

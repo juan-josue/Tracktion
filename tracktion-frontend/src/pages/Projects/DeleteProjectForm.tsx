@@ -30,9 +30,9 @@ const DeleteProjectForm = ({ project }: Props) => {
 				if (err.response.status === 401) {
 					const newAccessToken = await refreshAccessToken();
 					if (newAccessToken) {
-						localStorage.setItem(`/projects/${project._id}`, newAccessToken);
+						localStorage.setItem('access_token', newAccessToken);
 						apiClient
-							.delete('/projects', { headers: { Authorization: `Bearer ${newAccessToken}` } })
+							.delete(`/projects/${project._id}`, { headers: { Authorization: `Bearer ${newAccessToken}` } })
 							.then(() => refreshPage())
 							.catch((err) => setErrorMessage(err.response.data));
 					} else {
