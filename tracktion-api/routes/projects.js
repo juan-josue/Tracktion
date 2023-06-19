@@ -22,6 +22,7 @@ router.get('/:id', auth, async (req, res) => {
 				populate: {
 					path: 'user',
 					model: 'User',
+					select: '-password',
 				},
 			},
 		});
@@ -33,6 +34,7 @@ router.get('/:id', auth, async (req, res) => {
 			populate: {
 				path: 'user',
 				model: 'User',
+				select: '-password',
 			},
 		});
 	}
@@ -119,6 +121,7 @@ router.delete('/:projectId/user/:userId', auth, async (req, res) => {
 			populate: {
 				path: 'user',
 				model: 'User',
+				select: '-password',
 			},
 		})
 		.populate('tasks');
