@@ -100,7 +100,9 @@ const TaskCard = ({ members, task }: Props) => {
 						/>
 					</>
 				)}
-				<img width="40%" src={task.taskTackler.user.pfp} alt="Profile picture" style={{ position: 'absolute', bottom: 0 }} />
+				{task.taskTackler && (
+					<img width="40%" src={task.taskTackler.user.pfp} alt="Profile picture" style={{ position: 'absolute', bottom: 0 }} />
+				)}
 			</Box>
 			<Stack direction="column" spacing={1} p={2}>
 				{errorMessage && (

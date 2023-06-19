@@ -111,4 +111,39 @@ router.delete('/:id', auth, async (req, res) => {
 	res.send(project);
 });
 
+// DELETE the user from the project
+router.delete('/:projectId/user/:userId', auth, async (req, res) => {
+	const project = await Project.findById(req.params.projectId)
+		.populate({
+			path: 'members',
+			populate: {
+				path: 'user',
+				model: 'User',
+			},
+		})
+		.populate('tasks');
+	if (!project) return res.status(404).send('The project with the given ID was not found.');
+
+	const user = await User.findById(req.params.userId);
+	if (!user) return res.status(404).send('The user with the given ID was not found.');
+
+	const member = project.members.find((member) => member.user._id.equals(user._id));
+	if (!member) return res.status(400).send('This user is not a member of the project.');
+
+	project.members.pull(member);
+
+	project.tasks.forEach(async (task) => {
+		if (task.taskTackler && task.taskTackler.equals(member._id)) {
+			task.taskTackler = null;
+			await task.save();
+		}
+	});
+	await project.save();
+
+	user.projects.pull(project._id);
+	await user.save();
+
+	res.send(project);
+});
+
 module.exports = router;

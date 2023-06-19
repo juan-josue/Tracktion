@@ -40,8 +40,6 @@ const Tasks = () => {
 		setStatus(newStatus);
 	};
 
-	console.log(idOrder, priority, status);
-
 	if (!project || !member) {
 		return (
 			<Typography variant="body1" color="error">

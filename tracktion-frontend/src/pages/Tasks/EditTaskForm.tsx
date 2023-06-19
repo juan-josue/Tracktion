@@ -17,7 +17,7 @@ const EditTaskForm = ({ members, task }: Props) => {
 	const [priority, setPriority] = useState(task.priority);
 	const [status, setStatus] = useState(task.status);
 	const [xpReward, setXpReward] = useState(task.xpReward);
-	const [taskTackler, setTaskTackler] = useState(task.taskTackler._id);
+	const [taskTackler, setTaskTackler] = useState(task.taskTackler ? task.taskTackler._id : '');
 	const [errorMessage, setErrorMessage] = useState('');
 
 	function refreshPage() {

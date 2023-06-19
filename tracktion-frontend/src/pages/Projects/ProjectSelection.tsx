@@ -10,6 +10,7 @@ import { Project } from '../../types/types';
 import Modal from '../../components/Modal';
 import EditProjectForm from './EditProjectForm';
 import DeleteProjectForm from './DeleteProjectForm';
+import LeaveProjectForm from './LeaveProjectForm';
 
 interface Props {
 	selectedProject: Project | null;
@@ -71,7 +72,7 @@ const ProjectSelection = ({ selectedProject, userId }: Props) => {
 								Leave Adventure
 							</Button>
 						}
-						content={<DeleteProjectForm project={selectedProject}></DeleteProjectForm>}
+						content={<LeaveProjectForm project={selectedProject} userId={userId}></LeaveProjectForm>}
 					/>
 				)}
 			</Stack>
