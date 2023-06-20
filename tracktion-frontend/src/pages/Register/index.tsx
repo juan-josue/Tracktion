@@ -12,7 +12,7 @@ const Register = () => {
 		<>
 			<Grid container height="100vh">
 				<Grid item xs={12} md={6} sx={{ height: { xs: '70%', md: '100%' } }}>
-					<Box bgcolor="bg.main" height="100%" display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+					<Box bgcolor="bg.main" height="100%" display="flex" flexDirection="column" alignItems="center" justifyContent="center" pt={2}>
 						<Stack direction="column" spacing={1} mb={8} width="60%">
 							<Typography variant="h4" color="typography.main">
 								Create Your Tracktion Account!

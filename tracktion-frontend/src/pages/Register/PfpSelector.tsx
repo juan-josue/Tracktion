@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IconButton, Stack, Typography } from '@mui/material';
+import { Box, IconButton, Stack, Typography } from '@mui/material';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
@@ -26,13 +26,18 @@ const PfpSelector = ({ changePfp }: Props) => {
 	};
 
 	return (
-		<Stack direction="column" height="100%" justifyContent="center" alignItems="center" spacing={2}>
-			<Typography variant="h4">Select Your Quester</Typography>
-			<Stack direction="row" spacing={6} justifyContent="center" alignItems="center">
+		<Stack direction="column" width="100%" height="100%" justifyContent="center" alignItems="center" spacing={2}>
+			<Typography variant="h5">Select Your Quester</Typography>
+			<Stack direction="row" spacing={4} justifyContent="center" alignItems="center">
 				<IconButton onClick={() => handleClick(-1)} aria-label="delete" size="large" sx={{ fontSize: '3rem' }}>
 					<ArrowCircleLeftIcon fontSize="inherit" />
 				</IconButton>
-				<img src={pfpList[pfpIndex]} alt="Profile picture" />
+				<Box
+					component="img"
+					src={pfpList[pfpIndex]}
+					alt="Profile picture"
+					width={{xs: '100px', lg: '200px'}}
+				/>
 				<IconButton onClick={() => handleClick(1)} aria-label="delete" size="large" sx={{ fontSize: '3rem' }}>
 					<ArrowCircleRightIcon fontSize="inherit" />
 				</IconButton>
