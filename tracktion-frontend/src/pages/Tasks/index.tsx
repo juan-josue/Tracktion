@@ -56,9 +56,7 @@ const Tasks = () => {
 				</Typography>
 			)}
 			<Box minHeight="100vh" bgcolor="bg.main" p={2} boxSizing="border-box">
-				<Box bgcolor="bg.light" borderRadius="15px">
-					<Navbar />
-				</Box>
+				<Navbar />
 				<Box bgcolor="bg.light" borderRadius="15px" mt={2}>
 					<Grid container>
 						<Grid item xs={12} lg={6} p={2}>
@@ -82,7 +80,7 @@ const Tasks = () => {
 											/>
 										</Box>
 									</Grid>
-									<Grid item xs={6} md={6} display="flex" justifyContent='flex-end'>
+									<Grid item xs={6} md={6} display="flex" justifyContent="flex-end">
 										<FilterControls
 											idOrder={idOrder}
 											priority={priority}
@@ -104,7 +102,7 @@ const Tasks = () => {
 					<Typography variant="h3" mb={2}>
 						Quests
 					</Typography>
-					<TaskGrid filters={{idOrder, priority, status}} members={project.members} tasks={project.tasks} />
+					<TaskGrid filters={{ idOrder, priority, status }} members={project.members} tasks={project.tasks} />
 				</Box>
 			</Box>
 		</>
