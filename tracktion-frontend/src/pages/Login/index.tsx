@@ -2,6 +2,7 @@ import { Grid, Box, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import LoginForm from './LoginForm';
+import image from '../../assets/landing.svg';
 
 const Login = () => {
 	return (
@@ -50,6 +51,10 @@ const Login = () => {
 							bgcolor: 'primary.main',
 							height: '100%',
 							borderRadius: { xs: '15px 15px 0 0', md: '15px' },
+							backgroundImage: `url(${image})`,
+							backgroundRepeat: 'no-repeat',
+							backgroundSize: 'cover',
+							backgroundPosition: 'top',
 						}}
 					></Box>
 				</Grid>
