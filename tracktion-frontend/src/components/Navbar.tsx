@@ -1,10 +1,10 @@
 import { Chip, IconButton, Stack } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
 import logo from '../assets/logos/t.svg';
+import logout from '../services/logout';
 
 const Navbar = () => {
 	const navigate = useNavigate();
@@ -14,11 +14,14 @@ const Navbar = () => {
 			<Stack direction="row" spacing={2} alignItems="center">
 				<img src={logo} alt="Tracktion Logo" height="25px"></img>
 				<Chip color="primary" icon={<DashboardIcon />} onClick={() => navigate('/projects')} label="Projects" />
-				<IconButton aria-label="Profile" onClick={() => navigate('/projects')}>
-					<PersonIcon />
-				</IconButton>
 			</Stack>
-			<IconButton aria-label="Logout" onClick={() => navigate('/login')}>
+			<IconButton
+				aria-label="Logout"
+				onClick={() => {
+					logout();
+					navigate('/login');
+				}}
+			>
 				<LogoutIcon />
 			</IconButton>
 		</Stack>
