@@ -57,7 +57,7 @@ const EditProjectForm = ({ project }: Props) => {
 				<TextField
 					value={projectName}
 					onChange={(e) => setProjectName(e.target.value)}
-					label="Project Name"
+					label="Adventure Name"
 					type="text"
 					fullWidth
 					minRows={5}

@@ -27,14 +27,14 @@ const ProjectSelection = ({ selectedProject, userId }: Props) => {
 	if (!selectedProject) {
 		return (
 			<Typography variant="h5" color="typography.main" fontWeight="bold">
-				Select, Join, Or Create An Odyssey!
+				Select, Join, Or Create An Adventure!
 			</Typography>
 		);
 	}
 
 	return (
 		<>
-			<Typography variant="h5" color="typography.main" mb={2}>
+			<Typography variant="h5" fontWeight="bold" color="typography.main" mb={2}>
 				Current Selection
 			</Typography>
 			<Box mb={2} display="flex" justifyContent="center">

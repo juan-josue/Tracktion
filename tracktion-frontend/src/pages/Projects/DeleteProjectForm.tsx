@@ -47,11 +47,11 @@ const DeleteProjectForm = ({ project }: Props) => {
 	return (
 		<Box display="flex" flexDirection="column" alignItems="center">
 			<Typography pb={2} variant="h4">
-				Remove this project forever? Forever is a long time!
+				Remove this adventure forever? Forever is a long time!
 			</Typography>
 			<form onSubmit={handleSubmit} style={{ width: '100%' }}>
 				<Button variant="contained" type="submit" color="secondary" fullWidth>
-					Remove Project
+					Remove Adventure
 				</Button>
 			</form>
 

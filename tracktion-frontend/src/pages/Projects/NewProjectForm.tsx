@@ -50,9 +50,9 @@ const NewProjectForm = () => {
 		<form onSubmit={handleSubmit}>
 			<Box display={'flex'} flexDirection="column" gap={3}>
 				<TextField
-					placeholder="Give the new project a name..."
+					placeholder="Give the new adventure a name..."
 					onChange={(e) => setProjectName(e.target.value)}
-					label="Project Name"
+					label="Adventure Name"
 					type="text"
 					fullWidth
 					minRows={5}
@@ -60,7 +60,7 @@ const NewProjectForm = () => {
 					required
 				></TextField>
 				<TextField
-					placeholder="Tell us what this project is about..."
+					placeholder="Tell us what this adventure is about..."
 					onChange={(e) => setProjectDescription(e.target.value)}
 					label="Description"
 					type="text"
@@ -70,7 +70,7 @@ const NewProjectForm = () => {
 					variant="filled"
 				></TextField>
 				<Button variant="contained" type="submit" color="secondary">
-					Create Project
+					Create Adventure
 				</Button>
 				{errorMessage && (
 					<Typography variant="body1" color="error">

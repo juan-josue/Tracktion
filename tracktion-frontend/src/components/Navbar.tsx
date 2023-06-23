@@ -13,7 +13,7 @@ const Navbar = () => {
 		<Stack px={2} bgcolor="bg.main" direction="row" justifyContent="space-between" alignItems="center" borderRadius="15px">
 			<Stack direction="row" spacing={2} alignItems="center">
 				<img src={logo} alt="Tracktion Logo" height="25px"></img>
-				<Chip color="primary" icon={<DashboardIcon />} onClick={() => navigate('/projects')} label="Projects" />
+				<Chip color="primary" icon={<DashboardIcon />} onClick={() => navigate('/projects')} label="Adventures" />
 			</Stack>
 			<IconButton
 				aria-label="Logout"

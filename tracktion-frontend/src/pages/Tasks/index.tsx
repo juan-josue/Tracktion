@@ -100,7 +100,7 @@ const Tasks = () => {
 				</Box>
 				<Box bgcolor="bg.light" borderRadius="15px" mt={2} p={2}>
 					<Typography variant="h3" mb={2}>
-						Quests
+						Quest Board
 					</Typography>
 					<TaskGrid filters={{ idOrder, priority, status }} members={project.members} tasks={project.tasks} />
 				</Box>

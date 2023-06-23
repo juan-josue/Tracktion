@@ -73,14 +73,14 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 			<Stack direction="column" spacing={2}>
 				<TextField
 					color="secondary"
-					placeholder="Give the new task a name!"
+					placeholder="Give the new quest a name!"
 					onChange={(e) => setName(e.target.value)}
-					label="Task Name"
+					label="Quest Name"
 					type="text"
 					fullWidth
 					required
 				></TextField>
-				<TextField select label="Task Tackler" color="secondary" value={taskTackler} onChange={(e) => setTaskTackler(e.target.value)} required>
+				<TextField select label="Quest Tackler" color="secondary" value={taskTackler} onChange={(e) => setTaskTackler(e.target.value)} required>
 					{members.map((member: Member) => (
 						<MenuItem key={member._id} value={member._id}>
 							{`${member.user.name} ${member.user.email}`}
@@ -105,7 +105,7 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 				></TextField>
 				<TextField
 					color="secondary"
-					placeholder="Describe the task..."
+					placeholder="Describe the quest..."
 					onChange={(e) => setSummary(e.target.value)}
 					multiline
 					maxRows={10}
@@ -114,7 +114,7 @@ const NewTaskForm = ({ members, projectId }: Props) => {
 					fullWidth
 				></TextField>
 				<Button variant="contained" type="submit" color="secondary">
-					Create Task
+					Create Quest
 				</Button>
 				{errorMessage && (
 				<Typography variant="body1" color="error">

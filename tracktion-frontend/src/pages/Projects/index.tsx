@@ -81,12 +81,12 @@ const Projects = () => {
 								height="100%"
 							>
 								<Typography variant="h5" color="typography.main" fontWeight="bold">
-									Begin A New Odyssey
+									Begin A New Adventure
 								</Typography>
 								<Modal
 									button={
 										<Button variant="contained" color="secondary" fullWidth endIcon={<AddBoxIcon />}>
-											Create A New Project
+											Create A New Adventure
 										</Button>
 									}
 									content={<NewProjectForm />}
@@ -105,7 +105,7 @@ const Projects = () => {
 								height="100%"
 							>
 								<Typography variant="h5" color="typography.main" fontWeight="bold">
-									Join An Odyssey With A Code
+									Join An Adventure With A Code
 								</Typography>
 								<JoinProjectForm userId={user._id} />
 							</Box>

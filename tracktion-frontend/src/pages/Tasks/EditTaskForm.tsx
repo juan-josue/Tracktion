@@ -74,14 +74,14 @@ const EditTaskForm = ({ members, task }: Props) => {
 					color="secondary"
 					defaultValue={task.name}
 					onChange={(e) => setName(e.target.value)}
-					label="Task Name"
+					label="Quest Name"
 					type="text"
 					fullWidth
 					required
 				></TextField>
 				<TextField
 					select
-					label="Task Tackler"
+					label="Quest Tackler"
 					color="secondary"
 					value={taskTackler}
 					onChange={(e) => setTaskTackler(e.target.value)}
