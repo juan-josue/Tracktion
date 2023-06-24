@@ -47,15 +47,15 @@ const ProjectList = ({ projectIds, onProjectCardClick }: Props) => {
 					{errorMessage}
 				</Typography>
 			)}
-			<Stack direction="row" spacing={5} sx={{ overflowY: 'hidden' }}>
-				{projects.map((project) => (
-					<ProjectCard
-						key={project._id}
-						color="primary.main"
-						project={project}
-						onClick={handleProjectCardClick}
-					/>
-				))}
+			<Stack direction="column" spacing={2}>
+				<Typography variant="h5" color="typography.main" fontWeight="bold">
+					Your Adventure List
+				</Typography>
+				<Stack direction="row" spacing={5} sx={{ overflowY: 'hidden' }}>
+					{projects.map((project) => (
+						<ProjectCard key={project._id} color="primary.main" project={project} onClick={handleProjectCardClick} />
+					))}
+				</Stack>
 			</Stack>
 		</>
 	);
