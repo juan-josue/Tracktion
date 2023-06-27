@@ -47,7 +47,7 @@ const ProjectList = ({ projectIds, onProjectCardClick }: Props) => {
 					{errorMessage}
 				</Typography>
 			)}
-			<Stack direction="column" spacing={2}>
+			<Stack direction="column" spacing={2} sx={{overflowX: 'scroll'}}>
 				<Typography variant="h5" color="typography.main" fontWeight="bold">
 					Your Adventure List
 				</Typography>
