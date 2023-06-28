@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('express-async-errors')
+require('express-async-errors');
 const error = require('./middleware/error');
 const users = require('./routes/users');
 const projects = require('./routes/projects');
