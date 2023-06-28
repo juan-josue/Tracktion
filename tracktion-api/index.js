@@ -1,5 +1,6 @@
 require('dotenv').config();
 require('express-async-errors');
+const handleUncaughtException = require('./utils/uncaughtException');
 const error = require('./middleware/error');
 const users = require('./routes/users');
 const projects = require('./routes/projects');
@@ -11,6 +12,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const express = require('express');
 const app = express();
+
+process.on('uncaughtException', handleUncaughtException);
 
 app.use(morgan('tiny'));
 app.use(express.json());
