@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/me', auth, async (req, res) => {
 	const user = await User.findById(req.user._id).select('-password');
 	if (!user) return res.status(404).send('The user with the given ID was not found.');
-	res.send({user});
+	res.send(user);
 });
 
 // GET specified user

@@ -14,7 +14,7 @@ const useUser = () => {
 
 		apiClient
 			.get('/users/me', { headers: { Authorization: `Bearer ${accessToken}` } })
-			.then((res) => setUser(res.data.user))
+			.then((res) => setUser(res.data))
 			.catch(async (err) => {
 				if (err.response.status === 401) {
 					const newAccessToken = await refreshAccessToken();
@@ -22,7 +22,7 @@ const useUser = () => {
 						localStorage.setItem('access_token', newAccessToken);
 						apiClient
 							.get('/users/me', { headers: { Authorization: `Bearer ${newAccessToken}` } })
-							.then((res) => setUser(res.data.user))
+							.then((res) => setUser(res.data))
 							.catch(() => navigate('/login'));
 					} else {
 						navigate('/login');

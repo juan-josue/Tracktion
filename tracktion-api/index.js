@@ -1,4 +1,6 @@
 require('dotenv').config();
+require('express-async-errors')
+const error = require('./middleware/error');
 const users = require('./routes/users');
 const projects = require('./routes/projects');
 const tasks = require('./routes/tasks');
@@ -18,6 +20,7 @@ app.use('/api/projects', projects);
 app.use('/api/tasks', tasks);
 app.use('/api/members', members);
 app.use('/api/auth', auth);
+app.use(error);
 
 // Define the port to listen on
 const port = process.env.PORT || 3000;
