@@ -1,2 +1,8 @@
+# Ignore log files
+*.log
+
+# Ignore .env file
 tracktion-api/.env
+
+# Ignore node_modules directory
 tracktion-api/node_modules/
