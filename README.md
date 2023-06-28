@@ -23,7 +23,7 @@ Tracktion is an innovative full-stack MERN (MongoDB, Express, React, Node.js) we
 | React, TypeScript, Material UI | JavaScript, Node, Express | MongoDB Atlas |
 
 ## <a name="demo"></a> Demo Video
-[Video Demo link](https://youtu.be/oMDSgVQhY-g)
+[Video Demo link](https://www.youtube.com/watch?v=SKyNa2Cw-fg)
 
 ## <a name="future"></a> Plans For The Future
 I have exciting plans to expand Tracktion by incorporating more gamified Scrum features in the future. My aim is to enhance the accessibility and engagement of Scrum and Agile methodologies through gamification, making the process even more enjoyable and rewarding for users.
