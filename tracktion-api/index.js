@@ -1,17 +1,20 @@
 require('dotenv').config();
 require('express-async-errors');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const cors = require('cors');
+const express = require('express');
+
 const handleUncaughtException = require('./utils/uncaughtException');
 const handleUnhandledRejection = require('./utils/unhandledRejection');
 const error = require('./middleware/error');
+
 const users = require('./routes/users');
 const projects = require('./routes/projects');
 const tasks = require('./routes/tasks');
 const members = require('./routes/members');
 const auth = require('./routes/auth');
-const mongoose = require('mongoose');
-const morgan = require('morgan');
-const cors = require('cors');
-const express = require('express');
+
 const app = express();
 
 process.on('uncaughtException', handleUncaughtException);
