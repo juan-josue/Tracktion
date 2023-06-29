@@ -5,9 +5,9 @@ const logger = createLogger({
 	transports: [new transports.File({ filename: 'logfile.log' })],
 });
 
-function handleUncaughtException(ex) {
+function handleUnhandledRejection(ex) {
     logger.error(ex.message, { exception: ex });
     process.exit(1);
 }
 
-module.exports = handleUncaughtException;
+module.exports = handleUnhandledRejection;
