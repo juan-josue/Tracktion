@@ -6,8 +6,11 @@ const logger = createLogger({
 });
 
 function handleUncaughtException(ex) {
-    logger.error(ex.message, { exception: ex });
-    process.exit(1);
+	logger.error(ex.message, { exception: ex });
+	console.error(ex.message, ex);
+	setTimeout(() => {
+		process.exit(1);
+	}, 2000);
 }
 
 module.exports = handleUncaughtException;
