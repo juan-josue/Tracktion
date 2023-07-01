@@ -3,6 +3,7 @@ const Joi = require('joi');
 
 const xpCap = 20;
 
+// Define Member Schema
 const memberSchema = new mongoose.Schema({
 	level: {
 		type: Number,
@@ -30,8 +31,10 @@ const memberSchema = new mongoose.Schema({
 	},
 });
 
+// Create the Member model use the Member Schema
 const Member = mongoose.model('Member', memberSchema);
 
+// Validation function for Member objects using Joi
 function validateMember(member) {
 	const schema = Joi.object({
 		user: Joi.string(),
@@ -44,5 +47,6 @@ function validateMember(member) {
 	return schema.validate(member);
 }
 
+// Export Member model and validation function
 exports.Member = Member;
 exports.validateMember = validateMember;

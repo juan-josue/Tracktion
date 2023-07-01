@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
+// Define Project Schema
 const projectSchema = new mongoose.Schema({
 	description: {
 		type: String,
@@ -42,8 +43,10 @@ const projectSchema = new mongoose.Schema({
 	],
 });
 
+// Create the Project model use the Project Schema
 const Project = mongoose.model('Project', projectSchema);
 
+// Function which generates unique join codes of the format XXXX-XXXX (eg H3A8-UQZ1)
 async function generateJoinCode() {
 	let newCode;
 	do {
@@ -55,6 +58,7 @@ async function generateJoinCode() {
 	return newCode;
 }
 
+// Validation function for Project objects using Joi
 function validateProject(project) {
 	const schema = Joi.object({
 		description: Joi.string().max(1024),
@@ -66,6 +70,7 @@ function validateProject(project) {
 	return schema.validate(project);
 }
 
+// Export Project model, generate join code function, and validation function
 exports.Project = Project;
 exports.generateJoinCode = generateJoinCode;
 exports.validateProject = validateProject;

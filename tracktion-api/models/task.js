@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
+// Define Task Schema
 const taskSchema = new mongoose.Schema({
 	dateCreated: {
 		type: Date,
@@ -51,8 +52,10 @@ const taskSchema = new mongoose.Schema({
 	},
 });
 
+// Create the Task model use the Task Schema
 const Task = mongoose.model('Task', taskSchema);
 
+// Validation function for Task objects using Joi
 function validateTask(task) {
 	const schema = Joi.object({
 		dateCreated: Joi.date(),
@@ -70,5 +73,6 @@ function validateTask(task) {
 	return schema.validate(task);
 }
 
+// Export Task model and validation function
 exports.Task = Task;
 exports.validateTask = validateTask;

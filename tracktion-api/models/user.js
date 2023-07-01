@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const jwt = require('jsonwebtoken');
 
+// Define User Schema
 const userSchema = new mongoose.Schema({
 	email: {
 		type: String,
@@ -32,8 +32,10 @@ const userSchema = new mongoose.Schema({
 	}
 });
 
+// Create the User model use the User Schema
 const User = mongoose.model('User', userSchema);
 
+// Validation function for User objects using Joi
 function validateUser(user) {
 	const schema = Joi.object({
 		email: Joi.string().email(),
@@ -45,5 +47,6 @@ function validateUser(user) {
 	return schema.validate(user);
 }
 
+// Export User model and validation function
 exports.User = User;
 exports.validateUser = validateUser;
