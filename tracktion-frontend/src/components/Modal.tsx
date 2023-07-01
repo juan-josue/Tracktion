@@ -16,7 +16,6 @@ const Modal = ({button, content} : Props) => {
 
 	return (
 		<>
-			{/* <Button variant='contained' color='secondary' onClick={toggleModal} endIcon={<AddBoxIcon/>}>{buttonText}</Button> */}
 			<div onClick={toggleModal}>{button}</div>
 
 			{isOpen && (
