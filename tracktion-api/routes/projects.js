@@ -143,6 +143,8 @@ router.delete('/:projectId/user/:userId', auth, async (req, res) => {
 	});
 	await project.save();
 
+	await Member.findByIdAndDelete(member._id);
+
 	user.projects.pull(project._id);
 	await user.save();
 
