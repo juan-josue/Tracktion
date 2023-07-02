@@ -187,4 +187,5 @@ router.delete('/:projectId/user/:userId', auth, async (req, res) => {
 	res.send(project);
 });
 
+// Export the router object
 module.exports = router;
