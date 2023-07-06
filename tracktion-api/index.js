@@ -30,6 +30,8 @@ app.use('/api/members', members);
 app.use('/api/auth', auth);
 app.use(error);
 
+require('./startup/prod')(app);
+
 // Define the port to listen on
 const port = process.env.PORT || 3000;
 
