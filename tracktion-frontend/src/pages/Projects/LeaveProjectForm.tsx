@@ -2,7 +2,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import { Member, Project } from '../../types/types';
+import { Project } from '../../types/types';
 import refreshAccessToken from '../../services/refreshAccessToken';
 import apiClient from '../../services/apiClient';
 
