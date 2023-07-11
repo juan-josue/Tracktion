@@ -3,7 +3,7 @@ import { Box, IconButton, Stack, Typography } from '@mui/material';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
-import pfpList from '../../assets/pfps/gifs';
+import pfpList from '../../../public/pfps/gifs';
 
 interface Props {
 	changePfp: (pfp: string) => void;
