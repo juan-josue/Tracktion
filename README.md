@@ -1,5 +1,7 @@
 # Tracktion
 
+<img src="tracktion-mockup.png" alt="Tracktion Mockup of Tasks, Login, and Project Dashboard screens"/>
+
 Tracktion is an innovative full-stack MERN (MongoDB, Express, React, Node.js) web application that switches up project management by incorporating gamification elements. With dynamic leaderboards, animated avatars, XP-based levelling systems, and quests. Tracktion creates an engaging and competitive environment fostering user engagement and driving enhanced productivity. Combining elements of gamification with traditional project management, Tracktion offers a unique and enjoyable approach to planning and executing projects.
 
 ## Table of contents
