@@ -31,3 +31,11 @@ Tracktion is an innovative full-stack MERN (MongoDB, Express, React, Node.js) we
 
 ## <a name="future"></a> Plans For The Future
 I have exciting plans to expand Tracktion by incorporating more gamified Scrum features in the future. My aim is to enhance the accessibility and engagement of Scrum and Agile methodologies through gamification, making the process even more enjoyable and rewarding for users.
+
+## Gallery
+
+<img src="LoginTracktion.png" alt="Tracktion Login"/>
+
+<img src="DashTracktion.png" alt="Tracktion Dash"/>
+
+<img src="HomeTracktion.png" alt="Tracktion Home"/>
